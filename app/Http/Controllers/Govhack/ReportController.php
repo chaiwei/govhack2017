@@ -43,7 +43,7 @@ class ReportController extends Controller
       $data[] = [
         'area' => $result->SA2Name,
         'location' => ['lat'=>$lat, 'lng'=>$lng], 
-        'weight' => ($result->total_population/1000)
+        'weight' => ($result->total_population)
       ];
     }
     return $data;

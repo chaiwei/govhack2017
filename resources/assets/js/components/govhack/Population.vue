@@ -146,15 +146,39 @@
                                     response.data[index].location.lat, 
                                     response.data[index].location.lng
                                 ),
-                                label: "t "+response.data[index].weight
+                                label: ""+parseInt(response.data[index].weight/1000),
+                                title: response.data[index].area + " : " +response.data[index].weight,
                             });
                             heatmapData.push(result);
 
                         }
-
+                        if(typeof window.markerCluster == 'object'){
+                            window.markerCluster.setMap(null);
+                        }
                         // Add a marker clusterer to manage the markers.
-                        var markerCluster = new MarkerClusterer(window.map, heatmapData,
-                            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+                        window.markerCluster = new MarkerClusterer(window.map, heatmapData, { 
+                            imagePath: Config.baseurl+'img/vendor/js-marker-clusterer/m'
+                        });
+                        window.markerCluster.calculator_ = function(markers, numStyles) {
+                            var index = 0;
+                            var count = 0;
+                            for(var x in markers){
+                              count += (markers[x].label*1);
+                            }
+                            var dv = count;
+                            while (dv !== 0) {
+                              dv = parseInt(dv / 10, 10);
+                              index++;
+                            }
+
+                            index = Math.min(index, numStyles);
+                            return {
+                              text: count,
+                              index: index
+                            };
+                        };
+
+
 
                     });
                 }.bind(this);
@@ -179,7 +203,6 @@
             $("#filter-agegroup").slider({
                 tooltip: 'always',
                 formatter: function(value) {
-                  console.log(value);
                     if (value == 86){
                         value = '85+';
                     }
