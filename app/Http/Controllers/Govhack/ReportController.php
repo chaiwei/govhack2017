@@ -24,9 +24,9 @@ class ReportController extends Controller
   function getPopulation(Request $request, $year){
     $query = DB::table('population as p')
       ->leftJoin('location_latlng as l', 'p.SA2Code', '=', 'l.code')
-      ->select('p.SA2Code', 'p.SA2Name', 'l.latlng', DB::raw('SUM(p.total) as total_population'))
       ->where('p.Year', $year)
       ->groupBy('p.SA2Code', 'p.SA2Name', 'l.latlng');
+    
     $gender = [];
     if($request->input('male') == 'true'){
         $gender[] = 'male';
@@ -35,6 +35,18 @@ class ReportController extends Controller
         $gender[] = 'female';
     } 
     $query->whereIn('gender', $gender);
+    
+    $sumCol = ['p.total'];
+    if(is_array($request->input('agegroup'))){
+        $ageGroupStart = $request->input('agegroup')[0];
+        $ageGroupEnd = $request->input('agegroup')[1];
+        $sumCol = [];
+        while($ageGroupStart <= $ageGroupEnd){
+            $sumCol[] = 'age'.$ageGroupStart;
+            $ageGroupStart++;
+        }
+    }  
+    $query->select('p.SA2Code', 'p.SA2Name', 'l.latlng', DB::raw('SUM('.implode('+', $sumCol).') as total_population'));
     $results = $query->get();
 
     $data = [];
