@@ -60,27 +60,28 @@
                     var script = document.createElement('script');
                     script.src = '//maps.googleapis.com/maps/api/js?key='+Config.GMAP_API_KEY+'&libraries=visualization&callback=initMap';
                     document.getElementsByTagName('head')[0].appendChild(script);
-                    
-                    window['initMap'] = function(){
-                        this.map = new google.maps.Map(document.getElementById('map'), {
-                          zoom: 4,
-                          mapTypeId: 'terrain'
-                        });
-
-                        $.ajax({
-                            type: "GET",
-                            url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + this.country + "&sensor=false&key=" + Config.GMAP_API_KEY,
-                            dataType: "json"
-                        }).done(function(data){
-                            if(typeof data.results[0] == 'object'){
-                                this.map.setCenter(data.results[0].geometry.location);
-                            } else {
-                                alert(this.country + " can't be found!");
-                            }
-                        }.bind(this));
-
-                    }.bind(this);
+                }else{
+                    initMap();
                 }
+                window['initMap'] = function(){
+                    this.map = new google.maps.Map(document.getElementById('map'), {
+                      zoom: 4,
+                      mapTypeId: 'terrain'
+                    });
+
+                    $.ajax({
+                        type: "GET",
+                        url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + this.country + "&sensor=false&key=" + Config.GMAP_API_KEY,
+                        dataType: "json"
+                    }).done(function(data){
+                        if(typeof data.results[0] == 'object'){
+                            this.map.setCenter(data.results[0].geometry.location);
+                        } else {
+                            alert(this.country + " can't be found!");
+                        }
+                    }.bind(this));
+
+                }.bind(this);
                 
             },
 
@@ -108,6 +109,7 @@
                                 var marker = new google.maps.Marker({
                                   position: data.results[0].geometry.location,
                                   map: this.map,
+                                  label: this.current_progress_index,
                                   title: address
                                 });
                                 marker.setMap(this.map);

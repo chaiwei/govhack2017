@@ -16,6 +16,7 @@ const UserProfile = Vue.component('userprofile', require('./components/member/Us
 /**
  * Govhack
  */
+const Introduction = Vue.component('introduction', require('./components/govhack/Introduction.vue'));
 const Population = Vue.component('population', require('./components/govhack/Population.vue'));
 const AddressToLatLng = Vue.component('addresstolatlng', require('./components/govhack/AddressToLatLng.vue'));
 
@@ -24,6 +25,7 @@ export const Routes = [
         path: '/',
         components: { default: Page, header: ThemeHeader, sidebar: ThemeSidebar, footer: ThemeFooter },
         children: [
+            { path: '/', component: Introduction },
             { path: '/notifications', component: Notification },
             { path: '/dashboard', component: Dashboard },
             { path: '/myaccount/userprofile', component: UserProfile },

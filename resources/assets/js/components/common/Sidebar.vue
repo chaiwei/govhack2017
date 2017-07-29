@@ -66,25 +66,11 @@
                 toggleName: '',
                 currentUrl: '',
                 menulist: [ 
-                /*{
-                  menuName: "Dashboard",
-                  menuIcon: "fa-home",
-                  menuUrl: "/dashboard"
-                },
                 {
-                  menuName: "Report",
-                  menuIcon: "fa-line-chart",
-                  menuSubLink: [
-                    {
-                      menuName: "Client Billing",
-                      menuUrl: "/report/client-billing"
-                    },
-                    {
-                      menuName: "SW Timesheet",
-                      menuUrl: "/report/sw-timesheet"
-                    }
-                  ]
-                },*/
+                  menuName: "Introduction",
+                  menuIcon: "fa-home",
+                  menuUrl: "/"
+                }, 
                 {
                   menuName: "Reports",
                   menuIcon: "fa-line-chart",

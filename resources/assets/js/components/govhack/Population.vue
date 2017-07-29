@@ -4,7 +4,7 @@
         <section class="content-header"><h1>Filter</h1></section>
         <breadcrumbs></breadcrumbs>
         <div class="form-group">
-            <label for="exampleInputEmail1">Year</label>
+            <label for="filter-year">Year</label>
             <input id="filter-year" type="text" v-model="year" data-provide="slider" 
                 data-slider-min="2012"
                 data-slider-max="2027"
@@ -14,10 +14,14 @@
             />
         </div>
         <div class="form-group">
-            <input type="checkbox" /> Population
-        </div>
-        <div class="form-group">
-            <input type="checkbox" /> Age
+            <label for="filter-agegroup">Age</label>
+            <input id="filter-agegroup" type="text" v-model="year" data-provide="slider" 
+                data-slider-min="0"
+                data-slider-max="85"
+                data-slider-step="1"
+                data-slider-value="[50,85]"
+                data-slider-tooltip="show"
+            />
         </div>
         <div class="form-group">
             <input type="checkbox" /> Sex
@@ -48,7 +52,8 @@
             return {
                 breadcrumbs: ['home'],
                 map: null,
-                year: 2012
+                year: 2012,
+                agegroup: '50,85'
             }
         },
         methods : {
@@ -121,7 +126,15 @@
         mounted() {
             window['vm'] = this;
             console.log("test mounted");
+
             $("#filter-year").slider({
+                tooltip: 'always'
+            }).on("slideStop", function(slideEvt) {
+                this.year = slideEvt.value;
+                generateHeatMap();
+            }.bind(this));
+
+            $("#filter-agegroup").slider({
                 tooltip: 'always'
             }).on("slideStop", function(slideEvt) {
                 this.year = slideEvt.value;

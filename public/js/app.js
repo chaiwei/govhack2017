@@ -4416,12 +4416,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Notification_vue__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Notification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Notification_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Announcement_vue__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Announcement_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Announcement_vue__);
-//
-//
 //
 //
 //
@@ -4449,8 +4443,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-
-
+/*
+import Notification from './Notification.vue';
+import Annoucement from './Announcement.vue';
+*/
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -4461,11 +4457,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         console.log('Header mounted.');
-    },
-
-    components: {
-        'notification': __WEBPACK_IMPORTED_MODULE_1__Notification_vue___default.a,
-        'announcement': __WEBPACK_IMPORTED_MODULE_2__Announcement_vue___default.a
     }
 });
 
@@ -4621,27 +4612,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       toggleName: '',
       currentUrl: '',
-      menulist: [
-      /*{
-        menuName: "Dashboard",
+      menulist: [{
+        menuName: "Introduction",
         menuIcon: "fa-home",
-        menuUrl: "/dashboard"
-      },
-      {
-        menuName: "Report",
-        menuIcon: "fa-line-chart",
-        menuSubLink: [
-          {
-            menuName: "Client Billing",
-            menuUrl: "/report/client-billing"
-          },
-          {
-            menuName: "SW Timesheet",
-            menuUrl: "/report/sw-timesheet"
-          }
-        ]
-      },*/
-      {
+        menuUrl: "/"
+      }, {
         menuName: "Reports",
         menuIcon: "fa-line-chart",
         menuSubLink: [{
@@ -4866,13 +4841,14 @@ var UserProfile = Vue.component('userprofile', __webpack_require__(59));
 /**
  * Govhack
  */
+var Introduction = Vue.component('introduction', __webpack_require__(103));
 var Population = Vue.component('population', __webpack_require__(85));
 var AddressToLatLng = Vue.component('addresstolatlng', __webpack_require__(94));
 
 var Routes = [{
     path: '/',
     components: { default: Page, header: ThemeHeader, sidebar: ThemeSidebar, footer: ThemeFooter },
-    children: [{ path: '/notifications', component: Notification }, { path: '/dashboard', component: Dashboard }, { path: '/myaccount/userprofile', component: UserProfile },
+    children: [{ path: '/', component: Introduction }, { path: '/notifications', component: Notification }, { path: '/dashboard', component: Dashboard }, { path: '/myaccount/userprofile', component: UserProfile },
     /* Govhack */
     { path: '/govhack/population', component: Population }, { path: '/govhack/address-to-latlng', component: AddressToLatLng }]
 }];
@@ -35169,15 +35145,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "innerHTML": _vm._s(_vm.logoLg)
     }
-  })]), _vm._v(" "), _c('nav', {
-    staticClass: "navbar navbar-static-top"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "navbar-custom-menu"
-  }, [_c('ul', {
-    staticClass: "nav navbar-nav"
-  }, [_c('notification'), _vm._v(" "), _c('announcement')], 1)])])])
+  })]), _vm._v(" "), _vm._m(0)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
+  return _c('nav', {
+    staticClass: "navbar navbar-static-top"
+  }, [_c('a', {
     staticClass: "sidebar-toggle",
     attrs: {
       "href": "#",
@@ -35186,7 +35158,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "sr-only"
-  }, [_vm._v("Toggle navigation")])])
+  }, [_vm._v("Toggle navigation")])]), _vm._v(" "), _c('div', {
+    staticClass: "navbar-custom-menu"
+  }, [_c('ul', {
+    staticClass: "nav navbar-nav"
+  })])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -45636,6 +45612,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -45644,7 +45624,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return {
             breadcrumbs: ['home'],
             map: null,
-            year: 2012
+            year: 2012,
+            agegroup: '50,85'
         };
     },
 
@@ -45713,7 +45694,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     mounted: function mounted() {
         window['vm'] = this;
         console.log("test mounted");
+
         $("#filter-year").slider({
+            tooltip: 'always'
+        }).on("slideStop", function (slideEvt) {
+            this.year = slideEvt.value;
+            generateHeatMap();
+        }.bind(this));
+
+        $("#filter-agegroup").slider({
             tooltip: 'always'
         }).on("slideStop", function (slideEvt) {
             this.year = slideEvt.value;
@@ -45773,7 +45762,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
-      "for": "exampleInputEmail1"
+      "for": "filter-year"
     }
   }, [_vm._v("Year")]), _vm._v(" "), _c('input', {
     directives: [{
@@ -45801,27 +45790,43 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.year = $event.target.value
       }
     }
-  })]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5)], 1), _vm._v(" "), _vm._m(6)])
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "filter-agegroup"
+    }
+  }, [_vm._v("Age")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.year),
+      expression: "year"
+    }],
+    attrs: {
+      "id": "filter-agegroup",
+      "type": "text",
+      "data-provide": "slider",
+      "data-slider-min": "0",
+      "data-slider-max": "85",
+      "data-slider-step": "1",
+      "data-slider-value": "[50,85]",
+      "data-slider-tooltip": "show"
+    },
+    domProps: {
+      "value": (_vm.year)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.year = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3)], 1), _vm._v(" "), _vm._m(4)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('section', {
     staticClass: "content-header"
   }, [_c('h1', [_vm._v("Filter")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('input', {
-    attrs: {
-      "type": "checkbox"
-    }
-  }), _vm._v(" Population\n      ")])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('input', {
-    attrs: {
-      "type": "checkbox"
-    }
-  }), _vm._v(" Age\n      ")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-group"
@@ -46219,32 +46224,43 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     },
 
     methods: {
-        initMap: function initMap() {
+        initMap: function (_initMap) {
+            function initMap() {
+                return _initMap.apply(this, arguments);
+            }
+
+            initMap.toString = function () {
+                return _initMap.toString();
+            };
+
+            return initMap;
+        }(function () {
             if ((typeof google === 'undefined' ? 'undefined' : _typeof(google)) != 'object') {
                 var script = document.createElement('script');
                 script.src = '//maps.googleapis.com/maps/api/js?key=' + __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].GMAP_API_KEY + '&libraries=visualization&callback=initMap';
                 document.getElementsByTagName('head')[0].appendChild(script);
-
-                window['initMap'] = function () {
-                    this.map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 4,
-                        mapTypeId: 'terrain'
-                    });
-
-                    $.ajax({
-                        type: "GET",
-                        url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + this.country + "&sensor=false&key=" + __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].GMAP_API_KEY,
-                        dataType: "json"
-                    }).done(function (data) {
-                        if (_typeof(data.results[0]) == 'object') {
-                            this.map.setCenter(data.results[0].geometry.location);
-                        } else {
-                            alert(this.country + " can't be found!");
-                        }
-                    }.bind(this));
-                }.bind(this);
+            } else {
+                initMap();
             }
-        },
+            window['initMap'] = function () {
+                this.map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 4,
+                    mapTypeId: 'terrain'
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + this.country + "&sensor=false&key=" + __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].GMAP_API_KEY,
+                    dataType: "json"
+                }).done(function (data) {
+                    if (_typeof(data.results[0]) == 'object') {
+                        this.map.setCenter(data.results[0].geometry.location);
+                    } else {
+                        alert(this.country + " can't be found!");
+                    }
+                }.bind(this));
+            }.bind(this);
+        }),
         setupConvertion: function setupConvertion() {
             this.split_addresses = this.addresses.split("\n");
             this.current_progress_index = 0;
@@ -46269,6 +46285,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                             var marker = new google.maps.Marker({
                                 position: data.results[0].geometry.location,
                                 map: this.map,
+                                label: this.current_progress_index,
                                 title: address
                             });
                             marker.setMap(this.map);
@@ -48464,6 +48481,137 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-621d0542", module.exports)
+  }
+}
+
+/***/ }),
+/* 102 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            addresses: '',
+            split_addresses: [],
+            converted_addresses: "",
+            current_progress_index: 0,
+            country: "Australia",
+            inprogress: null,
+            map: null
+        };
+    },
+
+    methods: {},
+    mounted: function mounted() {}
+});
+
+/***/ }),
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(102),
+  /* template */
+  __webpack_require__(104),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "c:\\wamp\\www\\laravel\\mlm\\resources\\assets\\js\\components\\govhack\\Introduction.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Introduction.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3e68a1d0", Component.options)
+  } else {
+    hotAPI.reload("data-v-3e68a1d0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, [_c('section', {
+    staticClass: "content-header"
+  }, [_c('h1', [_vm._v("Welcome to Self Health 2020")])]), _vm._v(" "), _c('section', {
+    staticClass: "content"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, [_c('p', [_vm._v("Finding the right health services can be a challenge in normal circumstances. If the service is displayed, written or visually, in a language that is not native to the viewer, the problem is further exasperated.")]), _vm._v(" "), _c('p', [_vm._v("\n                    Self Health 2020 aims to deliver an easy interface for users to find the nearest health service. For each search, data will be collected to identify demand. This information will be gathered to help health service providers identify new locations to establish services that is in need.")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6"
+  }, [_c('h3', [_vm._v("Meet the team behind DataMineCraft")]), _vm._v(" "), _c('p', [_vm._v("Chong-Yee, Ong (Team Captain)")]), _vm._v(" "), _c('p', [_vm._v("Samuel Shee")]), _vm._v(" "), _c('p', [_vm._v("Benjamin Shee")]), _vm._v(" "), _c('p', [_vm._v("Alisson Kwok")]), _vm._v(" "), _c('p', [_vm._v("Chai Wei, Boey")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6"
+  }, [_c('div', {
+    attrs: {
+      "id": "map"
+    }
+  })])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-3e68a1d0", module.exports)
   }
 }
 

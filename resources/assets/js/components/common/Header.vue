@@ -17,8 +17,6 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <notification></notification>
-                <announcement></announcement>
             </ul>
         </div>
     </nav>	
@@ -27,8 +25,10 @@
 
 <script>
     import { Config } from '../../config.js';
+    /*
     import Notification from './Notification.vue';
     import Annoucement from './Announcement.vue';
+    */
 
     export default {
         data() {
@@ -40,9 +40,10 @@
         mounted() {
             console.log('Header mounted.')
         },
+        /*
         components: {
             'notification': Notification,
             'announcement' : Annoucement
-        }
+        }*/
     }
 </script>
