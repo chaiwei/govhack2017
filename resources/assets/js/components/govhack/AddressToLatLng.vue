@@ -33,11 +33,14 @@
         </div>
     </div>
 </template>
-<style>
+<style scoped>
     textarea {
         min-height: 400px;
     }
+    #map { height: 550px; width:100%; }
 </style>
+
+
 
 <script>
     import { Config } from '../../config.js';

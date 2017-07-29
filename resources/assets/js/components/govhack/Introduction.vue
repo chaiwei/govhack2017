@@ -37,13 +37,6 @@
     export default {
         data() {
             return {
-                addresses: '',
-                split_addresses: [],
-                converted_addresses: "",
-                current_progress_index: 0,
-                country: "Australia",
-                inprogress: null,
-                map: null
             }
         },
         methods : {

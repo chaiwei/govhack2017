@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <div class="col-md-2">
         <section class="content-header"><h1>Filter</h1></section>
         <breadcrumbs></breadcrumbs>
@@ -24,24 +25,43 @@
             />
         </div>
         <div class="form-group">
-            <input type="checkbox" /> Sex
+            <label for="filter-agegroup">Gender</label>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" /> Male
+                </label>
+                <label>
+                    <input type="checkbox" /> Female
+                </label>
+            </div>
         </div>
         <div class="form-group">
-            <input type="checkbox" /> Total Operational Aged Care Places and Ratios 2016
+            <label for="filter-agegroup">language Spoken</label>
+            <div class="checkbox">
+                <label>
+                    <input type="text" />
+                </label>
+            </div>
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail1">Language Spoken</label>
-            <select></select>
+            <label for="filter-agegroup">Dataset</label>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" /> Total Operational Aged Care Places and Ratios 2016
+                </label>
+            </div>
         </div>
+        
     </div>
     <div class="col-md-10"><div id="map"></div></div>
     
     
   </div>
 </template>
-<style>
+<style scoped>
   .slider.slider-horizontal { width: 100%; }
   #map { height: 550px; width:100%; }
+  .content-header { padding-left: 0; }
 </style>
 
 <script>
