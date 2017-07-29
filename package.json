@@ -23,6 +23,7 @@
     "bootstrap-slider": "^9.8.1",
     "d3": "^4.10.0",
     "font-awesome": "^4.7.0",
+    "js-marker-clusterer": "^1.0.0",
     "vue-router": "^2.7.0"
   }
 }

@@ -56,6 +56,8 @@ Vue.use(VueRouter)
 
 window.slider = require("bootstrap-slider");
 
+require('js-marker-clusterer');
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

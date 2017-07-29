@@ -27,7 +27,14 @@ class ReportController extends Controller
       ->select('p.SA2Code', 'p.SA2Name', 'l.latlng', DB::raw('SUM(p.total) as total_population'))
       ->where('p.Year', $year)
       ->groupBy('p.SA2Code', 'p.SA2Name', 'l.latlng');
-     
+    $gender = [];
+    if($request->input('male') == 'true'){
+        $gender[] = 'male';
+    }
+    if($request->input('female') == 'true'){
+        $gender[] = 'female';
+    } 
+    $query->whereIn('gender', $gender);
     $results = $query->get();
 
     $data = [];

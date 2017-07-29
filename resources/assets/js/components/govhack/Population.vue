@@ -6,7 +6,7 @@
         <breadcrumbs></breadcrumbs>
         <div class="form-group">
             <label for="filter-year">Year</label>
-            <input id="filter-year" type="text" v-model="year" data-provide="slider" 
+            <input id="filter-year" type="text" v-model="filter.year" data-provide="slider" 
                 data-slider-min="2012"
                 data-slider-max="2027"
                 data-slider-step="1"
@@ -16,11 +16,11 @@
         </div>
         <div class="form-group">
             <label for="filter-agegroup">Age</label>
-            <input id="filter-agegroup" type="text" v-model="year" data-provide="slider" 
+            <input id="filter-agegroup" type="text" v-model="filter.agegroup" data-provide="slider" 
                 data-slider-min="0"
-                data-slider-max="85"
-                data-slider-step="1"
-                data-slider-value="[50,85]"
+                data-slider-max="86"
+                data-slider-step="1" 
+                data-slider-value="[50,86]"
                 data-slider-tooltip="show"
             />
         </div>
@@ -28,20 +28,16 @@
             <label for="filter-agegroup">Gender</label>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" /> Male
+                    <input type="checkbox" v-model="filter.male" /> Male
                 </label>
                 <label>
-                    <input type="checkbox" /> Female
+                    <input type="checkbox" v-model="filter.female" /> Female
                 </label>
             </div>
         </div>
         <div class="form-group">
             <label for="filter-agegroup">language Spoken</label>
-            <div class="checkbox">
-                <label>
-                    <input type="text" />
-                </label>
-            </div>
+            <input type="text" />
         </div>
         <div class="form-group">
             <label for="filter-agegroup">Dataset</label>
@@ -71,9 +67,13 @@
         data() {
             return {
                 breadcrumbs: ['home'],
+                filter: {
+                  year: 2016,
+                  agegroup: [],
+                  male: true,
+                  female: true,
+                },
                 map: null,
-                year: 2012,
-                agegroup: '50,85'
             }
         },
         methods : {
@@ -105,15 +105,18 @@
                       center: window.gps,
                       mapTypeId: 'terrain'
                     });
+
                     generateHeatMap();
                 }.bind(this);
-                
+
+    
                 window.heatmapLayer = null;
                 window['generateHeatMap'] = function(){
-                    axios.get('/ajax/population/'+this.year).then(response => {
-                         
+                    axios.get('/ajax/population/'+this.filter.year, { params: this.filter }).then(response => {
+
                         var heatmapData = [];
-                        var result;
+                        
+                        /*
                         for(var index in response.data){
                             
                             result = {
@@ -124,6 +127,7 @@
                               'weight': response.data[index].weight
                             };
                             heatmapData.push(result);
+
                         }
                         if(window.heatmapLayer){
                             window.heatmapLayer.setMap(null);
@@ -134,6 +138,24 @@
                           map: window.map,
                           radius: 1
                         }); 
+                        */
+
+                        for(var index in response.data){
+                            var result = new google.maps.Marker({
+                                position: new google.maps.LatLng(
+                                    response.data[index].location.lat, 
+                                    response.data[index].location.lng
+                                ),
+                                label: "t "+response.data[index].weight
+                            });
+                            heatmapData.push(result);
+
+                        }
+
+                        // Add a marker clusterer to manage the markers.
+                        var markerCluster = new MarkerClusterer(window.map, heatmapData,
+                            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
                     });
                 }.bind(this);
 
@@ -150,16 +172,24 @@
             $("#filter-year").slider({
                 tooltip: 'always'
             }).on("slideStop", function(slideEvt) {
-                this.year = slideEvt.value;
+                this.filter.year = slideEvt.value;
                 generateHeatMap();
             }.bind(this));
 
             $("#filter-agegroup").slider({
-                tooltip: 'always'
-            }).on("slideStop", function(slideEvt) {
-                this.year = slideEvt.value;
+                tooltip: 'always',
+                formatter: function(value) {
+                  console.log(value);
+                    if (value == 86){
+                        value = '85+';
+                    }
+                    return value;
+                }
+            }).on("slideStop", function(slideEvt) { 
+                this.filter.agegroup = slideEvt.value;
                 generateHeatMap();
             }.bind(this));
+
             this.initMap();
             this.getGPSLocation();
         }
