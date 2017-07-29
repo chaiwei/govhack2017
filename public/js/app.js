@@ -15366,6 +15366,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -15474,6 +15477,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 window.gps.lng = location.coords.longitude;
             });
         },
+        regenerateHeatMap: function regenerateHeatMap() {
+            window.generateHeatMap();
+        },
         initMap: function initMap() {
 
             // Create a <script> tag and set the USGS URL as the source.
@@ -15576,6 +15582,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             tooltip: 'always'
         }).on("slideStop", function (slideEvt) {
             this.filter.year = slideEvt.value;
+            generateHeatMap();
+        }.bind(this));
+
+        $("#filter-agegroup").slider({
+            tooltip: 'always',
+            formatter: function formatter(value) {
+                if (value == 86) {
+                    value = '85+';
+                }
+                return value;
+            }
+        }).on("slideStop", function (slideEvt) {
+            this.filter.agegroup = slideEvt.value;
             generateHeatMap();
         }.bind(this));
 
@@ -20317,6 +20336,14 @@ MarkerClusterer.prototype.extend = function(obj1, obj2) {
  */
 MarkerClusterer.prototype.onAdd = function() {
   this.setReady_(true);
+};
+
+/**
+ * Implementaion of the interface method.
+ * @ignore
+ */
+MarkerClusterer.prototype.onRemove = function () {
+    this.setReady_(false);
 };
 
 /**
@@ -39291,7 +39318,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-12"
   }, [_c('section', {
     staticClass: "content-header"
-  }, [_c('h1', [_vm._v("Welcome to Self Health 2020")])]), _vm._v(" "), _c('section', {
+  }, [_c('h1', [_vm._v("Welcome to Self Health")])]), _vm._v(" "), _c('section', {
     staticClass: "content"
   }, [_c('div', {
     staticClass: "row"
@@ -39300,6 +39327,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('p', [_vm._v("Finding the right health services can be a challenge in normal circumstances. If the service is displayed, written or visually, in a language that is not native to the viewer, the problem is further exasperated.")]), _vm._v(" "), _c('p', [_vm._v("\n                    Self Health 2020 aims to deliver an easy interface for users to find the nearest health service. For each search, data will be collected to identify demand. This information will be gathered to help health service providers identify new locations to establish services that is in need.")])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-12"
   }, [_c('h3', [_vm._v("Meet the team behind DataMineCraft")]), _vm._v(" "), _c('p', [_vm._v("Chong-Yee, Ong (Team Captain)")]), _vm._v(" "), _c('p', [_vm._v("Samuel Shee")]), _vm._v(" "), _c('p', [_vm._v("Benjamin Shee")]), _vm._v(" "), _c('p', [_vm._v("Alison Kwok")]), _vm._v(" "), _c('p', [_vm._v("Chai Wei, Boey")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-12"
+  }, [_c('div', [_vm._v("Self Help")])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-12"
   }, [_c('h3'), _vm._v(" "), _c('img', {
     attrs: {
@@ -39414,6 +39443,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "checked": Array.isArray(_vm.filter.male) ? _vm._i(_vm.filter.male, null) > -1 : (_vm.filter.male)
     },
     on: {
+      "change": _vm.regenerateHeatMap,
       "__c": function($event) {
         var $$a = _vm.filter.male,
           $$el = $event.target,
@@ -39445,6 +39475,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "checked": Array.isArray(_vm.filter.female) ? _vm._i(_vm.filter.female, null) > -1 : (_vm.filter.female)
     },
     on: {
+      "change": _vm.regenerateHeatMap,
       "__c": function($event) {
         var $$a = _vm.filter.female,
           $$el = $event.target,
@@ -39565,7 +39596,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-circle text-success"
-  }), _vm._v(" " + _vm._s(_vm.user.status))])])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('ul', {
+  }), _vm._v(" " + _vm._s(_vm.user.status))])])]), _vm._v(" "), _c('ul', {
     staticClass: "sidebar-menu",
     attrs: {
       "data-widget": "tree"
@@ -39600,7 +39631,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('i', {
       class: ['fa', item.menuIcon]
-    }), _vm._v(" "), _c('span', [_vm._v(_vm._s(item.menuName))]), _vm._v(" "), _vm._m(2, true)]), _vm._v(" "), _c('transition', {
+    }), _vm._v(" "), _c('span', [_vm._v(_vm._s(item.menuName))]), _vm._v(" "), _vm._m(1, true)]), _vm._v(" "), _c('transition', {
       attrs: {
         "name": "sliderToggle",
         "mode": "out-in"
@@ -39635,34 +39666,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "aria-hidden": "true"
     }
   })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('form', {
-    staticClass: "sidebar-form",
-    attrs: {
-      "action": "#",
-      "method": "get"
-    }
-  }, [_c('div', {
-    staticClass: "input-group"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "name": "q",
-      "placeholder": "Search..."
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "input-group-btn"
-  }, [_c('button', {
-    staticClass: "btn btn-flat",
-    attrs: {
-      "type": "submit",
-      "name": "search",
-      "id": "search-btn"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-search"
-  })])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('span', {
     staticClass: "pull-right-container"

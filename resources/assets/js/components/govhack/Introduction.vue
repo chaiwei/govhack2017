@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <section class="content-header">
-                <h1>Welcome to Self Health 2020</h1>
+                <h1>Welcome to Self Health</h1>
             </section>
 
             <section class="content">
@@ -19,6 +19,9 @@
                         <p>Benjamin Shee</p>
                         <p>Alison Kwok</p>
                         <p>Chai Wei, Boey</p>
+                    </div>
+                    <div class="col-md-12">
+                        <div>Self Help</div>
                     </div>
                     <div class="col-md-12">
                         <h3></h3>

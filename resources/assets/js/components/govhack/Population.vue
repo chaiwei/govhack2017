@@ -28,10 +28,10 @@
             <label for="filter-agegroup">Gender</label>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" v-model="filter.male" /> Male
+                    <input type="checkbox" v-model="filter.male" v-on:change="regenerateHeatMap" /> Male
                 </label>
                 <label>
-                    <input type="checkbox" v-model="filter.female" /> Female
+                    <input type="checkbox" v-model="filter.female" v-on:change="regenerateHeatMap" /> Female
                 </label>
             </div>
         </div>
@@ -83,6 +83,10 @@
                   window.gps.lat = location.coords.latitude;
                   window.gps.lng = location.coords.longitude;
                 });
+            },
+            regenerateHeatMap(){
+                window.generateHeatMap();
+              
             },
             initMap () {
 
@@ -197,6 +201,19 @@
                 tooltip: 'always'
             }).on("slideStop", function(slideEvt) {
                 this.filter.year = slideEvt.value;
+                generateHeatMap();
+            }.bind(this));
+
+            $("#filter-agegroup").slider({
+                tooltip: 'always',
+                formatter: function(value) {
+                    if (value == 86){
+                        value = '85+';
+                    }
+                    return value;
+                }
+            }).on("slideStop", function(slideEvt) { 
+                this.filter.agegroup = slideEvt.value;
                 generateHeatMap();
             }.bind(this));
 
