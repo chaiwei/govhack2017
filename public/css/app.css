@@ -1,0 +1,51 @@
+.main-sidebar .user-panel .image {
+  font-size: 32px;
+  color: #FFF;
+}
+
+.skin-minecraft .main-header .navbar {
+  background: #5b9b31;
+}
+
+.skin-minecraft .main-header .logo {
+  background: #46861b;
+}
+
+.skin-minecraft .main-header .logo:hover {
+  background: #3a7116;
+}
+
+.skin-minecraft .wrapper,
+.skin-minecraft .main-sidebar,
+.skin-minecraft .left-side {
+  background: #6b4834;
+  color: #FFF;
+}
+
+.skin-minecraft .sidebar-menu > li.header {
+  background: #4f3526;
+  color: #FFF;
+}
+
+.skin-minecraft .sidebar-menu > li > a,
+.skin-minecraft .sidebar-menu > li:hover > a,
+.skin-minecraft .sidebar-menu > li.active > a {
+  background: #966c4a;
+  color: #FFF;
+}
+
+.skin-minecraft .sidebar-menu > li > .treeview-menu {
+  background: #966c4a;
+}
+
+.skin-minecraft .treeview-menu > li > a {
+  color: #FFF;
+}
+
+.skin-minecraft .sidebar a {
+  color: #FFF;
+}
+
+.skin-minecraft .content-wrapper, .right-side {
+  color: #636b6f;
+}

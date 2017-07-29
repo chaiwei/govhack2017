@@ -1,0 +1,20 @@
+
+
+export const Config = {
+    // use in common/Header.vue
+    logoLg: "<b>DataMineCraft</b>",
+    logoMini: "<b>DMC</b>",
+
+    // use in app.js & bootstrap.js
+    baseurl: "/",
+
+    // use in app.js
+    themeCssClass: "skin-red skin-minecraft",
+
+    // use in common/Footer.vue
+    appVersion: "Self Health 2020 v1.00",
+    copyright: "Copyright &copy; "+new Date().getFullYear()+" DataMineCraft ",
+
+    // others
+    GMAP_API_KEY: "XXXXXXXXXXXXXXXXXXXXXXXXX"
+};
