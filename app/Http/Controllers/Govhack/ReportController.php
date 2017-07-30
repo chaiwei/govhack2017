@@ -61,7 +61,7 @@ class ReportController extends Controller
       DB::raw('SUM(a.home_care_low_places) as home_care_low_places'), 
       DB::raw('SUM(a.home_care_high_places) as home_care_high_places'), 
       DB::raw('SUM(a.transition_care_places) as transition_care_places'),
-      DB::raw('( '.$distance_cal.' * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * 
+      DB::raw('SUM( '.$distance_cal.' * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * 
         cos( radians( lng ) - radians('.$lng.') ) + sin( radians('.$lat.') ) * 
         sin( radians( lat ) ) ) ) AS distance'));
     $query->having('distance', '<', $request->input('distance'));
