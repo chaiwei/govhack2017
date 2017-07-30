@@ -69,8 +69,6 @@
                     var script = document.createElement('script');
                     script.src = '//maps.googleapis.com/maps/api/js?key='+Config.GMAP_API_KEY+'&libraries=visualization&callback=initMap';
                     document.getElementsByTagName('head')[0].appendChild(script);
-                }else{
-                    initMap();
                 }
                 window['initMap'] = function(){
                     this.map = new google.maps.Map(document.getElementById('map'), {
@@ -92,6 +90,10 @@
 
                 }.bind(this);
                 
+                if(typeof google == 'object'){
+                    initMap();
+                }
+
             },
 
             setupConvertion () {

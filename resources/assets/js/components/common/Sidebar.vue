@@ -72,13 +72,14 @@
                   menuUrl: "/"
                 }, 
                 {
-                  menuName: "Reports",
+                  menuName: "Population Chart",
                   menuIcon: "fa-line-chart",
+                  menuUrl: "/govhack/population"
+                }, 
+                {
+                  menuName: "Tools",
+                  menuIcon: "fa-wrench",
                   menuSubLink: [
-                    {
-                      menuName: "Population",
-                      menuUrl: "/govhack/population"
-                    },
                     {
                       menuName: "Address to Lat Lng",
                       menuUrl: "/govhack/address-to-latlng"

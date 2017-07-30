@@ -15,13 +15,10 @@
                     <div class="col-md-12"> 
                         <h3>Meet the team behind DataMineCraft</h3>
                         <p>Chong-Yee, Ong (Team Captain)</p>
-                        <p>Samuel Shee</p>
-                        <p>Benjamin Shee</p>
-                        <p>Alison Kwok</p>
+                        <p>Samuel Shee </p>
+                        <p>Benjamin Shee </p>
+                        <p>Alison Kwok </p>
                         <p>Chai Wei, Boey</p>
-                    </div>
-                    <div class="col-md-12">
-                        <div>Self Help</div>
                     </div>
                     <div class="col-md-12">
                         <h3></h3>

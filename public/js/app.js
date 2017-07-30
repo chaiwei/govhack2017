@@ -15113,12 +15113,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         menuIcon: "fa-home",
         menuUrl: "/"
       }, {
-        menuName: "Reports",
+        menuName: "Population Chart",
         menuIcon: "fa-line-chart",
+        menuUrl: "/govhack/population"
+      }, {
+        menuName: "Tools",
+        menuIcon: "fa-wrench",
         menuSubLink: [{
-          menuName: "Population",
-          menuUrl: "/govhack/population"
-        }, {
           menuName: "Address to Lat Lng",
           menuUrl: "/govhack/address-to-latlng"
         }]
@@ -15263,8 +15264,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 var script = document.createElement('script');
                 script.src = '//maps.googleapis.com/maps/api/js?key=' + __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].GMAP_API_KEY + '&libraries=visualization&callback=initMap';
                 document.getElementsByTagName('head')[0].appendChild(script);
-            } else {
-                initMap();
             }
             window['initMap'] = function () {
                 this.map = new google.maps.Map(document.getElementById('map'), {
@@ -15284,6 +15283,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     }
                 }.bind(this));
             }.bind(this);
+
+            if ((typeof google === 'undefined' ? 'undefined' : _typeof(google)) == 'object') {
+                initMap();
+            }
         }),
         setupConvertion: function setupConvertion() {
             this.split_addresses = this.addresses.split("\n");
@@ -15337,9 +15340,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(2);
-//
-//
-//
 //
 //
 //
@@ -15486,6 +15486,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -15507,7 +15516,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 },
                 dataset: {
                     population: true,
-                    language: null,
+                    language: true,
                     agecareservice: true
                 }
             },
@@ -15539,7 +15548,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         regenerateHeatMap: function regenerateHeatMap() {
             window.generateHeatMap();
         },
-        initMap: function initMap() {
+        initMap: function (_initMap) {
+            function initMap() {
+                return _initMap.apply(this, arguments);
+            }
+
+            initMap.toString = function () {
+                return _initMap.toString();
+            };
+
+            return initMap;
+        }(function () {
 
             // Create a <script> tag and set the USGS URL as the source.
             var script;
@@ -15550,9 +15569,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 script = document.createElement('script');
                 script.src = '//maps.googleapis.com/maps/api/js?key=' + __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].GMAP_API_KEY + '&libraries=visualization&callback=initMap';
                 document.getElementsByTagName('head')[0].appendChild(script);
-            } else {
-                window.initMap();
             }
+
             window.map = null;
             window['initMap'] = function () {
                 window.map = new google.maps.Map(document.getElementById('map'), {
@@ -15583,7 +15601,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                                 position: new google.maps.LatLng(response.data[index].location.lat, response.data[index].location.lng),
                                 animation: google.maps.Animation.DROP,
                                 label: "" + parseInt(response.data[index].weight),
-                                title: 'Language: ' + response.data[index].language + " : " + response.data[index].weight,
+                                title: 'Number of ppl spoke for the selected language ' + response.data[index].area + " : " + response.data[index].weight,
                                 icon: image
                             });
                             window.heatmapDataLanguage.push(result);
@@ -15703,7 +15721,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     });
                 }
             }.bind(this);
-        }
+
+            if ((typeof google === 'undefined' ? 'undefined' : _typeof(google)) == 'object') {
+                initMap();
+            }
+        })
     },
     created: function created() {
         console.log("test created");
@@ -15747,6 +15769,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
         this.initMap();
         this.getGPSLocation();
+
+        $('#population-map-legend .checkbox').append('<label class="col-md-12"> <img src="' + __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].baseurl + 'img/vendor/dmc-gmaps-marker-clusterer/population/m1.png" /> Population </label>' + '<label class="col-md-12"> <img src="' + __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].baseurl + 'img/vendor/dmc-gmaps-marker-clusterer/language/m1.png" /> Language </label>' + '<label class="col-md-12"> <img src="' + __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].baseurl + 'img/vendor/dmc-gmaps-marker-clusterer/agecare/m1.png" /> Agecare Services </label>');
     }
 });
 
@@ -37873,6 +37897,7 @@ module.exports = Component.exports
 
 /* styles */
 __webpack_require__(82)
+__webpack_require__(94)
 
 var Component = __webpack_require__(1)(
   /* script */
@@ -38101,16 +38126,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('nav', {
     staticClass: "navbar navbar-static-top"
-  }, [_c('a', {
-    staticClass: "sidebar-toggle",
-    attrs: {
-      "href": "#",
-      "data-toggle": "push-menu",
-      "role": "button"
-    }
-  }, [_c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Toggle navigation")])]), _vm._v(" "), _c('div', {
+  }, [_c('div', {
     staticClass: "navbar-custom-menu"
   }, [_c('ul', {
     staticClass: "nav navbar-nav"
@@ -38145,9 +38161,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-12"
   }, [_c('p', [_vm._v("Finding the right health services can be a challenge in normal circumstances. If the service is displayed, written or visually, in a language that is not native to the viewer, the problem is further exasperated.")]), _vm._v(" "), _c('p', [_vm._v("\n                    Self Health 2020 aims to deliver an easy interface for users to find the nearest health service. For each search, data will be collected to identify demand. This information will be gathered to help health service providers identify new locations to establish services that is in need.")])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-12"
-  }, [_c('h3', [_vm._v("Meet the team behind DataMineCraft")]), _vm._v(" "), _c('p', [_vm._v("Chong-Yee, Ong (Team Captain)")]), _vm._v(" "), _c('p', [_vm._v("Samuel Shee")]), _vm._v(" "), _c('p', [_vm._v("Benjamin Shee")]), _vm._v(" "), _c('p', [_vm._v("Alison Kwok")]), _vm._v(" "), _c('p', [_vm._v("Chai Wei, Boey")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-12"
-  }, [_c('div', [_vm._v("Self Help")])]), _vm._v(" "), _c('div', {
+  }, [_c('h3', [_vm._v("Meet the team behind DataMineCraft")]), _vm._v(" "), _c('p', [_vm._v("Chong-Yee, Ong (Team Captain)")]), _vm._v(" "), _c('p', [_vm._v("Samuel Shee ")]), _vm._v(" "), _c('p', [_vm._v("Benjamin Shee ")]), _vm._v(" "), _c('p', [_vm._v("Alison Kwok ")]), _vm._v(" "), _c('p', [_vm._v("Chai Wei, Boey")])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-12"
   }, [_c('h3'), _vm._v(" "), _c('img', {
     attrs: {
@@ -38497,7 +38511,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "for": "filter-agegroup"
     }
   }, [_vm._v("Dataset")]), _vm._v(" "), _c('div', {
-    staticClass: "checkbox"
+    staticClass: "checkbox clearfix"
   }, [_c('label', {
     staticClass: "col-md-12"
   }, [_c('input', {
@@ -38600,11 +38614,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  }), _vm._v(" Agecare Service\n              ")])])])], 1), _vm._v(" "), _vm._m(1)])
+  }), _vm._v(" Agecare Service\n              ")])])]), _vm._v(" "), _vm._m(1)], 1), _vm._v(" "), _vm._m(2)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('section', {
     staticClass: "content-header"
   }, [_c('h1', [_vm._v("Filter")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group",
+    attrs: {
+      "id": "population-map-legend"
+    }
+  }, [_c('label', [_vm._v("Legend")]), _vm._v(" "), _c('div', {
+    staticClass: "checkbox row"
+  })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-md-9"
@@ -50625,6 +50648,39 @@ Cluster.prototype['getMarkers'] = Cluster.prototype.getMarkers;
 ClusterIcon.prototype['onAdd'] = ClusterIcon.prototype.onAdd;
 ClusterIcon.prototype['draw'] = ClusterIcon.prototype.draw;
 ClusterIcon.prototype['onRemove'] = ClusterIcon.prototype.onRemove;
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(9)();
+exports.push([module.i, "\n#population-map-legend img { max-height: 30px;\n}\n", ""]);
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(93);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("05308cc1", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-4e2a49fa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./Population.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-4e2a49fa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./Population.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);

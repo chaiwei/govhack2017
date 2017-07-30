@@ -61,7 +61,7 @@
         </div>
         <div class="form-group">
             <label for="filter-agegroup">Dataset</label>
-            <div class="checkbox">
+            <div class="checkbox clearfix">
                 <label class="col-md-12">
                     <input type="checkbox" v-model="filter.dataset.population" v-on:change="datasetVisibility" /> Population
                 </label>
@@ -71,6 +71,11 @@
                 <label class="col-md-12">
                     <input type="checkbox" v-model="filter.dataset.agecareservice" v-on:change="datasetVisibility" /> Agecare Service
                 </label>
+            </div>
+        </div>
+        <div id="population-map-legend" class="form-group">
+            <label>Legend</label>
+            <div class="checkbox row">
             </div>
         </div>
         
@@ -84,6 +89,10 @@
   .slider.slider-horizontal { width: 100%; }
   #map { height: 550px; width:100%; }
   .content-header { padding-left: 0; }
+</style>
+
+<style>
+  #population-map-legend img { max-height: 30px; }
 </style>
 
 <script>
@@ -107,7 +116,7 @@
                     },
                     dataset: {
                         population: true,
-                        language: null,
+                        language: true,
                         agecareservice: true,
                     }
                 },
@@ -150,9 +159,8 @@
                     script = document.createElement('script');
                     script.src = '//maps.googleapis.com/maps/api/js?key='+Config.GMAP_API_KEY+'&libraries=visualization&callback=initMap';
                     document.getElementsByTagName('head')[0].appendChild(script);
-                }else{
-                    window.initMap();
                 }
+
                 window.map = null;
                 window['initMap'] = function(){
                     window.map = new google.maps.Map(document.getElementById('map'), {
@@ -164,7 +172,6 @@
                     generateHeatMap();
                 }.bind(this);
 
-    
                 window.heatmapLayer = null;
                 window['generateHeatMap'] = function(){
                     
@@ -187,7 +194,7 @@
                                     ),
                                     animation: google.maps.Animation.DROP,
                                     label: ""+parseInt(response.data[index].weight),
-                                    title: 'Language: '+response.data[index].language + " : " +response.data[index].weight,
+                                    title: 'Number of ppl spoke for the selected language '+response.data[index].area + " : " +response.data[index].weight,
                                     icon: image
                                 });
                                 window.heatmapDataLanguage.push(result);
@@ -317,6 +324,10 @@
                     }
                 }.bind(this);
 
+                if(typeof google == 'object'){
+                    initMap();
+                }
+
             } 
             
         },
@@ -362,6 +373,13 @@
 
             this.initMap();
             this.getGPSLocation();
+
+            $('#population-map-legend .checkbox').append(
+                '<label class="col-md-12"> <img src="'+Config.baseurl+'img/vendor/dmc-gmaps-marker-clusterer/population/m1.png" /> Population </label>'+
+                '<label class="col-md-12"> <img src="'+Config.baseurl+'img/vendor/dmc-gmaps-marker-clusterer/language/m1.png" /> Language </label>'+
+                '<label class="col-md-12"> <img src="'+Config.baseurl+'img/vendor/dmc-gmaps-marker-clusterer/agecare/m1.png" /> Agecare Services </label>'
+            );
+            
         }
     }
 </script>
