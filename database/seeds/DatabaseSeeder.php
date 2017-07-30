@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PopulationTableSeeder::class);
         $this->call(LocationLatlngTableSeeder::class);
         $this->call(LanguageSpokenHomeTableSeeder::class);
+        $this->call(AgecareServiceProvidersTableSeeder::class);
     }
 }

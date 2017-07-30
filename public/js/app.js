@@ -15485,6 +15485,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -38178,7 +38182,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-3"
   }, [_vm._m(0), _vm._v(" "), _c('breadcrumbs'), _vm._v(" "), _c('div', {
     staticClass: "form-group"
-  }, [_c('label', {
+  }, [_c('br'), _vm._v(" "), _c('br'), _vm._v(" "), _c('label', {
     attrs: {
       "for": "filter-year"
     }
@@ -38210,7 +38214,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
-  }, [_c('label', {
+  }, [_c('br'), _vm._v(" "), _c('br'), _vm._v(" "), _c('label', {
     attrs: {
       "for": "filter-agegroup"
     }

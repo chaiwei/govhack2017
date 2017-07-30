@@ -5,6 +5,8 @@
         <section class="content-header"><h1>Filter</h1></section>
         <breadcrumbs></breadcrumbs>
         <div class="form-group">
+            <br>
+            <br>
             <label for="filter-year">Year</label>
             <input id="filter-year" type="text" v-model="filter.year" data-provide="slider" 
                 data-slider-min="2012"
@@ -15,6 +17,8 @@
             />
         </div>
         <div class="form-group">
+            <br>
+            <br>
             <label for="filter-agegroup">Age</label>
             <input id="filter-agegroup" type="text" v-model="filter.agegroup" data-provide="slider" 
                 data-slider-min="0"
