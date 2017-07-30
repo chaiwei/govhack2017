@@ -40,6 +40,58 @@ class ReportController extends Controller
     return $data;
   }
 
+
+  public function getNearestAgeCareServiceList(Request $request){
+    $query = DB::table('agecare_service_providers as a');
+    $current_location = explode(',', $request->input('location'));
+    
+    $lat = $current_location[0];
+    $lng = $current_location[1];
+    
+    $distance_cal = 6371;
+    $query->select( 
+      'a.latlng', 
+      'a.provider_name', 
+      DB::raw('MAX(a.service_name) as service_name'), 
+      'a.address1', 
+      'a.address2', 
+      'a.suburb', 
+      'a.state', 
+      DB::raw('SUM(a.residential_places) as residential_places'), 
+      DB::raw('SUM(a.home_care_low_places) as home_care_low_places'), 
+      DB::raw('SUM(a.home_care_high_places) as home_care_high_places'), 
+      DB::raw('SUM(a.transition_care_places) as transition_care_places'),
+      DB::raw('( '.$distance_cal.' * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * 
+        cos( radians( lng ) - radians('.$lng.') ) + sin( radians('.$lat.') ) * 
+        sin( radians( lat ) ) ) ) AS distance'));
+    $query->having('distance', '<', $request->input('distance'));
+    $query->groupBy([
+      'a.latlng',
+      'a.provider_name', 
+      'a.address1', 
+      'a.address2', 
+      'a.suburb', 
+      'a.state', 
+      'lat', 'lng']);
+    $query->orderBy('distance', 'ASC');
+    $results = $query->get();
+
+    $data = [];
+    foreach($results as $result){
+      list($lat, $lng) = explode(',', $result->latlng);
+      $data[] = [
+        'provider_name' => $result->provider_name,
+        'service_name' => $result->service_name,
+        'address' => $result->address1.','.$result->address2.','.$result->suburb.','.$result->state,
+        'location' => ['lat'=>$lat, 'lng'=>$lng], 
+        'latlng' => $result->latlng, 
+        'distance' => number_format($result->distance,2), 
+        'weight' => ($result->residential_places + $result->home_care_low_places + $result->home_care_high_places + $result->transition_care_places)
+      ];
+    }
+    return $data;
+  }
+
   public function getLanguageSpokenAtHome(Request $request, $year){
     $query = DB::table('language_spoken_home as p')
       ->join('location_latlng as l', 'p.region', '=', 'l.name')

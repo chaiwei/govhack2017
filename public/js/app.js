@@ -15122,6 +15122,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         menuSubLink: [{
           menuName: "Address to Lat Lng",
           menuUrl: "/govhack/address-to-latlng"
+        }, {
+          menuName: "Nearest AgeCare Provider",
+          menuUrl: "/govhack/search-nearest-agecare"
         }]
       }],
       user: {
@@ -15942,13 +15945,14 @@ var UserProfile = Vue.component('userprofile', __webpack_require__(69));
 var Introduction = Vue.component('introduction', __webpack_require__(67));
 var Population = Vue.component('population', __webpack_require__(68));
 var AddressToLatLng = Vue.component('addresstolatlng', __webpack_require__(66));
+var SearchNearestAgecare = Vue.component('SearchAgecareService', __webpack_require__(96));
 
 var Routes = [{
     path: '/',
     components: { default: Page, header: ThemeHeader, sidebar: ThemeSidebar, footer: ThemeFooter },
     children: [{ path: '/', component: Introduction }, { path: '/notifications', component: Notification }, { path: '/dashboard', component: Dashboard }, { path: '/myaccount/userprofile', component: UserProfile },
     /* Govhack */
-    { path: '/govhack/population', component: Population }, { path: '/govhack/address-to-latlng', component: AddressToLatLng }]
+    { path: '/govhack/population', component: Population }, { path: '/govhack/address-to-latlng', component: AddressToLatLng }, { path: '/govhack/search-nearest-agecare', component: SearchNearestAgecare }]
 }];
 
 /***/ }),
@@ -50674,6 +50678,348 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-4e2a49fa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./Population.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-4e2a49fa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./Population.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 95 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(2);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            filter: {
+                location: '',
+                distance: '3'
+            },
+            results: []
+
+        };
+    },
+
+    methods: {
+        getLocation: function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(this.showPosition);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        },
+        showPosition: function showPosition(position) {
+            var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            this.filter.location = position.coords.latitude + ',' + position.coords.longitude;
+
+            this.findResults();
+
+            var mapOptions = {
+                scaleControl: true,
+                zoom: 12,
+                zoomControl: true,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                draggableCursor: 'crosshair'
+            };
+
+            window.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            this.showMarker();
+        },
+        clearMarker: function clearMarker() {
+
+            if (window.resultMarker != null) {
+                // window.resultMarker.setMap(null); 
+            }
+        },
+        showMarker: function showMarker() {
+
+            window.currentPositionMarker = new google.maps.Marker({
+                position: window.map.getCenter(),
+                map: window.map,
+                title: 'My current location'
+            });
+        },
+        findResults: function findResults() {
+            var $vm = this;
+            window.resultMarker = [];
+            var image = __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].baseurl + 'img/vendor/dmc-gmaps-marker-clusterer/agecare/m0.png';
+            axios.get('/ajax/get-nearest-agecare-service-providers', { params: this.filter }).then(function (response) {
+                $vm.results = response.data;
+                for (var index in response.data) {
+                    window.resultMarker.push(new google.maps.Marker({
+                        position: new google.maps.LatLng(response.data[index].location.lat, response.data[index].location.lng),
+                        map: window.map,
+                        label: "" + (index * 1 + 1),
+                        title: response.data[index].provider_name,
+                        icon: image
+                    }));
+                }
+            });
+        },
+        initMap: function initMap() {
+            var script;
+            if ((typeof google === 'undefined' ? 'undefined' : _typeof(google)) != 'object') {
+                script = document.createElement('script');
+                script.src = '//maps.googleapis.com/maps/api/js?key=' + __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].GMAP_API_KEY + '&libraries=visualization';
+                document.getElementsByTagName('head')[0].appendChild(script);
+            }
+        }
+    },
+    mounted: function mounted() {
+        this.initMap();
+        $("#filter-distance").slider({
+            tooltip: 'always'
+        }).on("slideStop", function (slideEvt) {
+            this.filter.distance = slideEvt.value;
+        }.bind(this));
+    }
+});
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(99)
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(95),
+  /* template */
+  __webpack_require__(97),
+  /* scopeId */
+  "data-v-b1bdb3fa",
+  /* cssModules */
+  null
+)
+Component.options.__file = "c:\\wamp\\www\\laravel\\mlm\\resources\\assets\\js\\components\\govhack\\SearchAgecareService.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SearchAgecareService.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b1bdb3fa", Component.options)
+  } else {
+    hotAPI.reload("data-v-b1bdb3fa", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('div', {
+    staticClass: "col-md-6"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('br'), _c('br'), _vm._v(" "), _c('label', {
+    attrs: {
+      "for": "filter-location"
+    }
+  }, [_vm._v("Location")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.filter.location),
+      expression: "filter.location"
+    }],
+    attrs: {
+      "id": "filter-location",
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.filter.location)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.filter.location = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('a', {
+    on: {
+      "click": _vm.getLocation
+    }
+  }, [_vm._v("getLocation")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('br'), _vm._v(" "), _c('label', {
+    attrs: {
+      "for": "filter-distance"
+    }
+  }, [_vm._v("Distance")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.filter.distance),
+      expression: "filter.distance"
+    }],
+    attrs: {
+      "id": "filter-distance",
+      "type": "text",
+      "data-provide": "slider",
+      "data-slider-min": "0",
+      "data-slider-max": "30",
+      "data-slider-step": "1",
+      "data-slider-value": "3",
+      "data-slider-tooltip": "show"
+    },
+    domProps: {
+      "value": (_vm.filter.distance)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.filter.distance = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "table-responsive",
+    staticStyle: {
+      "max-height": "300px"
+    }
+  }, [_c('table', {
+    staticClass: "table table-bordered"
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.results), function(result, index) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s((index + 1)))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(result.provider_name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(result.distance + ' KM'))]), _vm._v(" "), _c('td', [_c('a', {
+      staticClass: "btn btn-success",
+      attrs: {
+        "href": ""
+      }
+    }, [_vm._v("Call")]), _vm._v(" "), _c('a', {
+      staticClass: "btn  btn-warning",
+      attrs: {
+        "target": "_blank",
+        "href": 'https://www.google.com.au/maps/dir/' + _vm.filter.location + '/' + result.latlng
+      }
+    }, [_vm._v("Direction")])])])
+  }))])])]), _vm._v(" "), _vm._m(2)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content-header"
+  }, [_c('h1', [_vm._v("Find my nearest AgeCare")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("No")]), _vm._v(" "), _c('th', [_vm._v("Provider")]), _vm._v(" "), _c('th', [_vm._v("Distance")]), _vm._v(" "), _c('th', [_vm._v("Actions")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-md-6"
+  }, [_c('div', {
+    attrs: {
+      "id": "map"
+    }
+  })])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-b1bdb3fa", module.exports)
+  }
+}
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(9)();
+exports.push([module.i, "\n.slider.slider-horizontal[data-v-b1bdb3fa] { width: 100%;\n}\n#map[data-v-b1bdb3fa] { height: 550px; width:100%;\n}\n.content-header[data-v-b1bdb3fa] { padding-left: 0;\n}\n", ""]);
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(98);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("69e567d4", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-b1bdb3fa\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SearchAgecareService.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-b1bdb3fa\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SearchAgecareService.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

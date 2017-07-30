@@ -39,6 +39,7 @@ Route::get('/ajax/member/userprofile', 'Member\MemberController@getUserProfile')
 Route::get('/ajax/population/{year}', 'Govhack\ReportController@getPopulation');
 Route::get('/ajax/languagespoken/{year}', 'Govhack\ReportController@getLanguageSpokenAtHome');
 Route::get('/ajax/agecare-service-providers', 'Govhack\ReportController@getAgeCareServiceList');
+Route::get('/ajax/get-nearest-agecare-service-providers', 'Govhack\ReportController@getNearestAgeCareServiceList');
 
 
 

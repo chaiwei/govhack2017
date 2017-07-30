@@ -19,6 +19,7 @@ const UserProfile = Vue.component('userprofile', require('./components/member/Us
 const Introduction = Vue.component('introduction', require('./components/govhack/Introduction.vue'));
 const Population = Vue.component('population', require('./components/govhack/Population.vue'));
 const AddressToLatLng = Vue.component('addresstolatlng', require('./components/govhack/AddressToLatLng.vue'));
+const SearchNearestAgecare = Vue.component('SearchAgecareService', require('./components/govhack/SearchAgecareService.vue'));
 
 export const Routes = [
     {
@@ -32,6 +33,7 @@ export const Routes = [
             /* Govhack */
             { path: '/govhack/population', component: Population },
             { path: '/govhack/address-to-latlng', component: AddressToLatLng },
+            { path: '/govhack/search-nearest-agecare', component: SearchNearestAgecare },
         ]
     }
 ]
