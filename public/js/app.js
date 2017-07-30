@@ -15598,10 +15598,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         var image = __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].baseurl + 'img/vendor/dmc-gmaps-marker-clusterer/language/m3.png';
                         for (var index in response.data) {
                             var result = new google.maps.Marker({
-                                position: new google.maps.LatLng(response.data[index].location.lat, response.data[index].location.lng),
+                                position: new google.maps.LatLng(response.data[index].location.lat * 1 + 0.001, response.data[index].location.lng * 1 + 0.001),
                                 animation: google.maps.Animation.DROP,
                                 label: "" + parseInt(response.data[index].weight),
-                                title: 'Number of ppl spoke for the selected language ' + response.data[index].area + " : " + response.data[index].weight,
+                                title: 'First language speakers for selected language(s) in ' + response.data[index].area + " : " + response.data[index].weight,
                                 icon: image
                             });
                             window.heatmapDataLanguage.push(result);
@@ -15643,10 +15643,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         var image = __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* Config */].baseurl + 'img/vendor/dmc-gmaps-marker-clusterer/population/m3.png';
                         for (var index in response.data) {
                             var result = new google.maps.Marker({
-                                position: new google.maps.LatLng(response.data[index].location.lat, response.data[index].location.lng),
+                                position: new google.maps.LatLng(response.data[index].location.lat * 1 + 0.002, response.data[index].location.lng * 1 + 0.002),
                                 animation: google.maps.Animation.DROP,
                                 label: "" + parseInt(response.data[index].weight),
-                                title: "Population " + response.data[index].area + " : " + response.data[index].weight,
+                                title: "Population in " + response.data[index].area + " : " + response.data[index].weight,
                                 icon: image
                             });
                             window.heatmapPopulationData.push(result);
@@ -15691,7 +15691,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                                 position: new google.maps.LatLng(response.data[index].location.lat, response.data[index].location.lng),
                                 animation: google.maps.Animation.DROP,
                                 label: "" + response.data[index].weight,
-                                title: "Agecare " + response.data[index].provider_name + " : " + response.data[index].weight,
+                                title: "No of places available in " + response.data[index].provider_name + " : " + response.data[index].weight,
                                 icon: image
                             });
                             window.heatmapAgecareData.push(result);
