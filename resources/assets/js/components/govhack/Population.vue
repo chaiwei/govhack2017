@@ -1,7 +1,7 @@
 <template>
   <div>
     
-    <div class="col-md-2">
+    <div class="col-md-3">
         <section class="content-header"><h1>Filter</h1></section>
         <breadcrumbs></breadcrumbs>
         <div class="form-group">
@@ -18,9 +18,9 @@
             <label for="filter-agegroup">Age</label>
             <input id="filter-agegroup" type="text" v-model="filter.agegroup" data-provide="slider" 
                 data-slider-min="0"
-                data-slider-max="86"
+                data-slider-max="85"
                 data-slider-step="1" 
-                data-slider-value="[50,86]"
+                data-slider-value="[50,85]"
                 data-slider-tooltip="show"
             />
         </div>
@@ -36,20 +36,45 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="filter-agegroup">language Spoken</label>
-            <input type="text" />
+            <label for="filter-agegroup">language spoken at home (2016)</label>
+            <div class="checkbox clearfix"> 
+                <label class="col-md-12">
+                    <input type="checkbox" v-model="filter.language.chinese" v-on:change="regenerateHeatMap" /> Chinese
+                </label>
+                <label class="col-md-12">
+                    <input type="checkbox" v-model="filter.language.cantonese" v-on:change="regenerateHeatMap" /> Cantonese
+                </label>
+                <label class="col-md-12">
+                    <input type="checkbox" v-model="filter.language.hakka" v-on:change="regenerateHeatMap" /> Hakka
+                </label>
+                <label class="col-md-12">
+                    <input type="checkbox" v-model="filter.language.mandarin" v-on:change="regenerateHeatMap" /> Mandarin
+                </label>
+                <label class="col-md-12">
+                    <input type="checkbox" v-model="filter.language.minnan" v-on:change="regenerateHeatMap" /> Min Nan
+                </label>
+                <label class="col-md-12">
+                    <input type="checkbox" v-model="filter.language.vietnamese" v-on:change="regenerateHeatMap" /> vietnamese
+                </label>
+            </div>
         </div>
         <div class="form-group">
             <label for="filter-agegroup">Dataset</label>
             <div class="checkbox">
-                <label>
-                    <input type="checkbox" /> Total Operational Aged Care Places and Ratios 2016
+                <label class="col-md-12">
+                    <input type="checkbox" v-model="filter.dataset.population" v-on:change="datasetVisibility" /> Population
+                </label>
+                <label class="col-md-12">
+                    <input type="checkbox" v-model="filter.dataset.language" v-on:change="datasetVisibility" /> Language
+                </label>
+                <label class="col-md-12">
+                    <input type="checkbox" v-model="filter.dataset.agecareservice" v-on:change="datasetVisibility" /> Agecare Service
                 </label>
             </div>
         </div>
         
     </div>
-    <div class="col-md-10"><div id="map"></div></div>
+    <div class="col-md-9"><div id="map"></div></div>
     
     
   </div>
@@ -68,23 +93,49 @@
             return {
                 breadcrumbs: ['home'],
                 filter: {
-                  year: 2016,
-                  agegroup: [],
-                  male: true,
-                  female: true,
+                    year: 2017,
+                    agegroup: [50,85],
+                    male: true,
+                    female: true,
+                    language: {
+                        chinese: true,
+                        cantonese: true,
+                        hakka: true,
+                        mandarin: true,
+                        minnan: true,
+                        vietnamese: true,
+                    },
+                    dataset: {
+                        population: true,
+                        language: null,
+                        agecareservice: true,
+                    }
                 },
                 map: null,
             }
         },
         methods : {
-            getGPSLocation (){
+            getGPSLocation () {
                 var $vm = this;
                 navigator.geolocation.getCurrentPosition(function(location) {
                   window.gps.lat = location.coords.latitude;
                   window.gps.lng = location.coords.longitude;
                 });
             },
-            regenerateHeatMap(){
+            datasetVisibility () {
+                  
+                if(this.filter.dataset.population == 'faise'){
+                    window.markerClusterPopulation.clearMarkers();
+                }
+                if(this.filter.dataset.language == 'faise'){
+                    window.markerClusterLanguage.clearMarkers();
+                }
+                if(this.filter.dataset.agecareservice == 'faise'){
+                    window.markerClusterAgecare.clearMarkers();
+                }
+                // window.generateHeatMap();
+            },
+            regenerateHeatMap () {
                 window.generateHeatMap();
               
             },
@@ -116,75 +167,152 @@
     
                 window.heatmapLayer = null;
                 window['generateHeatMap'] = function(){
-                    axios.get('/ajax/population/'+this.filter.year, { params: this.filter }).then(response => {
+                    
+                    // language
+                    if(this.filter.dataset.language == 'true'){
 
-                        var heatmapData = [];
-                        
-                        /*
-                        for(var index in response.data){
-                            
-                            result = {
-                              'location': new google.maps.LatLng(
-                                 response.data[index].location.lat, 
-                                 response.data[index].location.lng
-                              ),
-                              'weight': response.data[index].weight
-                            };
-                            heatmapData.push(result);
+                        axios.get('/ajax/languagespoken/'+this.filter.year, { params: this.filter }).then(response => {
 
-                        }
-                        if(window.heatmapLayer){
-                            window.heatmapLayer.setMap(null);
-                        }
-                        window.heatmapLayer = new google.maps.visualization.HeatmapLayer({
-                          data: heatmapData,
-                          dissipating: false,
-                          map: window.map,
-                          radius: 1
-                        }); 
-                        */
+                            window.heatmapDataLanguage = [];
+                             
+                            if(typeof window.markerClusterLanguage == 'object'){
+                                window.markerClusterLanguage.clearMarkers();
+                            }
+                            var image = Config.baseurl+'img/vendor/dmc-gmaps-marker-clusterer/language/m3.png';
+                            for(var index in response.data){
+                                var result = new google.maps.Marker({
+                                    position: new google.maps.LatLng(
+                                        response.data[index].location.lat, 
+                                        response.data[index].location.lng
+                                    ),
+                                    animation: google.maps.Animation.DROP,
+                                    label: ""+parseInt(response.data[index].weight).toLocaleString(),
+                                    title: response.data[index].area + " : " +response.data[index].weight,
+                                    icon: image
+                                });
+                                //window.heatmapDataLanguage.push(result);
 
-                        for(var index in response.data){
-                            var result = new google.maps.Marker({
-                                position: new google.maps.LatLng(
-                                    response.data[index].location.lat, 
-                                    response.data[index].location.lng
-                                ),
-                                label: ""+parseInt(response.data[index].weight/1000),
-                                title: response.data[index].area + " : " +response.data[index].weight,
+                            }
+                            // Add a marker clusterer to manage the markers.
+                            window.markerClusterLanguage = new MarkerClusterer(window.map, window.heatmapDataLanguage, { 
+                                imagePath: Config.baseurl+'img/vendor/dmc-gmaps-marker-clusterer/language/m'
                             });
-                            heatmapData.push(result);
+                            window.markerClusterLanguage.calculator_ = function(markers, numStyles) {
+                                var index = 0;
+                                var count = 0;
+                                for(var x in markers){
+                                  count += (markers[x].label*1);
+                                }
+                                var dv = count;
+                                while (dv !== 0) {
+                                  dv = parseInt(dv / 10, 10);
+                                  index++;
+                                }
 
-                        }
-                        if(typeof window.markerCluster == 'object'){
-                            window.markerCluster.setMap(null);
-                        }
-                        // Add a marker clusterer to manage the markers.
-                        window.markerCluster = new MarkerClusterer(window.map, heatmapData, { 
-                            imagePath: Config.baseurl+'img/vendor/js-marker-clusterer/m'
-                        });
-                        window.markerCluster.calculator_ = function(markers, numStyles) {
-                            var index = 0;
-                            var count = 0;
-                            for(var x in markers){
-                              count += (markers[x].label*1);
-                            }
-                            var dv = count;
-                            while (dv !== 0) {
-                              dv = parseInt(dv / 10, 10);
-                              index++;
-                            }
-
-                            index = Math.min(index, numStyles);
-                            return {
-                              text: count,
-                              index: index
+                                index = Math.min(index, numStyles);
+                                return {
+                                  text: count,
+                                  index: index
+                                };
                             };
-                        };
+                        });
+                    }
+                    
+                    if(this.filter.dataset.population == 'true'){
+                        // population
+                        axios.get('/ajax/population/'+this.filter.year, { params: this.filter }).then(response => {
 
+                            window.heatmapPopulationData = [];
+                             
+                            if(typeof window.markerClusterPopulation == 'object'){
+                                window.markerClusterPopulation.clearMarkers();
+                            }
+                            var image = Config.baseurl+'img/vendor/dmc-gmaps-marker-clusterer/population/m3.png';
+                            for(var index in response.data){ 
+                                var result = new google.maps.Marker({
+                                    position: new google.maps.LatLng(
+                                        response.data[index].location.lat, 
+                                        response.data[index].location.lng
+                                    ),
+                                    animation: google.maps.Animation.DROP,
+                                    label: ""+parseInt(response.data[index].weight),
+                                    title: "Population "+response.data[index].area + " : " +response.data[index].weight,
+                                    icon: image
+                                });
+                                window.heatmapPopulationData.push(result);
 
+                            }
+                            // Add a marker clusterer to manage the markers.
+                            window.markerClusterPopulation = new MarkerClusterer(window.map, window.heatmapPopulationData, { 
+                                imagePath: Config.baseurl+'img/vendor/dmc-gmaps-marker-clusterer/population/m'
+                            });
+                            window.markerClusterPopulation.calculator_ = function(markers, numStyles) {
+                                var index = 0;
+                                var count = 0;
+                                for(var x in markers){
+                                  count += (markers[x].label*1);
+                                }
+                                var dv = count;
+                                while (dv !== 0) {
+                                  dv = parseInt(dv / 10, 10);
+                                  index++;
+                                }
 
-                    });
+                                index = Math.min(index, numStyles);
+                                return {
+                                  text: count,
+                                  index: index
+                                };
+                            };
+                        });
+                    }
+
+                    if(this.filter.dataset.agecareservice == 'true'){
+                        // agecare service providers
+                        axios.get('/ajax/agecare-service-providers', { params: this.filter }).then(response => {
+
+                            window.heatmapAgecareData = [];
+                             
+                            if(typeof window.markerClusterAgecare == 'object'){
+                                window.markerClusterAgecare.clearMarkers();
+                            }
+                            var image = Config.baseurl+'img/vendor/dmc-gmaps-marker-clusterer/agecare/m3.png';
+                            for(var index in response.data){ 
+                                var result = new google.maps.Marker({
+                                    position: new google.maps.LatLng(
+                                        response.data[index].location.lat, 
+                                        response.data[index].location.lng
+                                    ),
+                                    animation: google.maps.Animation.DROP,
+                                    label: "1",
+                                    title: "Agecare "+response.data[index].provider_name + " : " +response.data[index].weight,
+                                    icon: image
+                                });
+                                window.heatmapAgecareData.push(result);
+
+                            }
+                            // Add a marker clusterer to manage the markers.
+                            window.markerClusterAgecare = new MarkerClusterer(window.map, window.heatmapAgecareData, { 
+                                imagePath: Config.baseurl+'img/vendor/dmc-gmaps-marker-clusterer/agecare/m'
+                            });
+                            window.markerClusterAgecare.calculator_ = function(markers, numStyles) {
+                                var index = 0;
+                                var count = markers.length;
+
+                                var dv = count;
+                                while (dv !== 0) {
+                                  dv = parseInt(dv / 10, 10);
+                                  index++;
+                                }
+
+                                index = Math.min(index, numStyles);
+                                return {
+                                  text: count,
+                                  index: index
+                                };
+                            };
+                        });
+                    }
                 }.bind(this);
 
             } 

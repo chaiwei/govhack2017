@@ -21,9 +21,59 @@ class ReportController extends Controller
       // $this->middleware('auth');
   }
 
-  function getPopulation(Request $request, $year){
+  public function getAgeCareServiceList(Request $request){
+    $query = DB::table('agecare_service_providers as a');
+    $query->select('a.*');
+    $results = $query->get();
+
+    $data = [];
+    foreach($results as $result){
+      list($lat, $lng) = explode(',', $result->latlng);
+      $data[] = [
+        'provider_name' => $result->provider_name,
+        'service_name' => $result->service_name,
+        'address' => $result->address1.','.$result->address2.','.$result->suburb.','.$result->state,
+        'location' => ['lat'=>$lat, 'lng'=>$lng], 
+        'weight' => ($result->residential_places + $result->home_care_low_places + $result->home_care_high_places + $result->transition_care_places)
+      ];
+    }
+    return $data;
+  }
+
+  public function getLanguageSpokenAtHome(Request $request, $year){
+    $query = DB::table('language_spoken_home as p')
+      ->join('location_latlng as l', 'p.region', '=', 'l.name')
+      ->where('p.census_year', '2016')
+      ->where('p.region_type', 'SA2')
+      ->where('p.state_name', 'Western Australia')
+      ->groupBy('p.region', 'l.latlng');
+    
+    $gender = [];
+    if($request->input('male') == 'true'){
+        $gender[] = 'males';
+    }
+    if($request->input('female') == 'true'){
+        $gender[] = 'females';
+    } 
+    $query->whereIn('gender', $gender);
+    $query->select('p.region', 'l.latlng', DB::raw('SUM(p.value) as total_population'));
+    $results = $query->get();
+
+    $data = [];
+    foreach($results as $result){
+      list($lat, $lng) = explode(',', $result->latlng);
+      $data[] = [
+        'area' => $result->region,
+        'location' => ['lat'=>$lat, 'lng'=>$lng], 
+        'weight' => ($result->total_population)
+      ];
+    }
+    return $data;
+  }
+
+  public function getPopulation(Request $request, $year){
     $query = DB::table('population as p')
-      ->leftJoin('location_latlng as l', 'p.SA2Code', '=', 'l.code')
+      ->join('location_latlng as l', 'p.SA2Code', '=', 'l.code')
       ->where('p.Year', $year)
       ->groupBy('p.SA2Code', 'p.SA2Name', 'l.latlng');
     

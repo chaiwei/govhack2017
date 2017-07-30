@@ -14,7 +14,7 @@ const { mix } = require('laravel-mix');
 mix.options({ processCssUrls: false });
 mix.copy('node_modules/font-awesome/fonts', 'public/fonts/vendor/font-awesome');
 mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/fonts/vendor/bootstrap');
-mix.copy('node_modules/js-marker-clusterer/images', 'public/img/vendor/js-marker-clusterer');
+mix.copy('node_modules/gmaps-marker-clusterer/images', 'public/img/vendor/gmaps-marker-clusterer');
 
 
 mix.js('resources/assets/js/app.js', 'public/js')

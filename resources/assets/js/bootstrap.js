@@ -56,7 +56,7 @@ Vue.use(VueRouter)
 
 window.slider = require("bootstrap-slider");
 
-require('js-marker-clusterer');
+require('gmaps-marker-clusterer');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
