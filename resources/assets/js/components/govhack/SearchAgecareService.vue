@@ -6,7 +6,7 @@
             <br><br>
             <label for="filter-location">Location</label>
             <input id="filter-location" type="text" v-model="filter.location" />
-            <a class v-on:click="getLocation">getLocation</a>
+            <a title="Get Location" class="btn btn-success" v-on:click="getLocation"><i class="fa fa-map-marker"></i></a>
         </div>
         <div class="form-group">
             <br>
@@ -35,7 +35,7 @@
                         <td>{{ result.provider_name }}</td>
                         <td>{{ result.distance+' KM' }}</td>
                         <td>
-                          <a class="btn btn-success" href="">Call</a>
+                          <a class="btn btn-success" href="#">Call</a>
                           <a class="btn  btn-warning" target="_blank" v-bind:href="'https://www.google.com.au/maps/dir/'+filter.location+'/'+result.latlng">Direction</a>
                         </td>
                     </tr>

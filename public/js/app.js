@@ -50916,10 +50916,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-success",
+    attrs: {
+      "title": "Get Location"
+    },
     on: {
       "click": _vm.getLocation
     }
-  }, [_vm._v("getLocation")])]), _vm._v(" "), _c('div', {
+  }, [_c('i', {
+    staticClass: "fa fa-map-marker"
+  })])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('br'), _vm._v(" "), _c('label', {
     attrs: {
@@ -50962,7 +50968,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('tr', [_c('td', [_vm._v(_vm._s((index + 1)))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(result.provider_name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(result.distance + ' KM'))]), _vm._v(" "), _c('td', [_c('a', {
       staticClass: "btn btn-success",
       attrs: {
-        "href": ""
+        "href": "#"
       }
     }, [_vm._v("Call")]), _vm._v(" "), _c('a', {
       staticClass: "btn  btn-warning",
