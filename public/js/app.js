@@ -15486,9 +15486,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
-//
-//
-//
 
 
 
@@ -15502,7 +15499,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 male: true,
                 female: true,
                 language: {
-                    chinese: true,
                     cantonese: true,
                     hakka: true,
                     mandarin: true,
@@ -15529,13 +15525,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
         datasetVisibility: function datasetVisibility() {
 
-            if (!this.filter.dataset.population) {
+            if (!this.filter.dataset.population && _typeof(window.markerClusterPopulation) == 'object') {
                 window.markerClusterPopulation.clearMarkers();
             }
-            if (!this.filter.dataset.language) {
-                //window.markerClusterLanguage.clearMarkers();
+            if (!this.filter.dataset.language && _typeof(window.markerClusterLanguage) == 'object') {
+                window.markerClusterLanguage.clearMarkers();
             }
-            if (!this.filter.dataset.agecareservice) {
+            if (!this.filter.dataset.agecareservice && _typeof(window.markerClusterAgecare) == 'object') {
                 window.markerClusterAgecare.clearMarkers();
             }
             window.generateHeatMap();
@@ -15586,11 +15582,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                             var result = new google.maps.Marker({
                                 position: new google.maps.LatLng(response.data[index].location.lat, response.data[index].location.lng),
                                 animation: google.maps.Animation.DROP,
-                                label: "" + parseInt(response.data[index].weight).toLocaleString(),
-                                title: response.data[index].area + " : " + response.data[index].weight,
+                                label: "" + parseInt(response.data[index].weight),
+                                title: 'Language: ' + response.data[index].language + " : " + response.data[index].weight,
                                 icon: image
                             });
-                            //window.heatmapDataLanguage.push(result);
+                            window.heatmapDataLanguage.push(result);
                         }
                         // Add a marker clusterer to manage the markers.
                         window.markerClusterLanguage = new MarkerClusterer(window.map, window.heatmapDataLanguage, {
@@ -38325,40 +38321,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("language spoken at home (2016)")]), _vm._v(" "), _c('div', {
     staticClass: "checkbox clearfix"
   }, [_c('label', {
-    staticClass: "col-md-12"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.filter.language.chinese),
-      expression: "filter.language.chinese"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.filter.language.chinese) ? _vm._i(_vm.filter.language.chinese, null) > -1 : (_vm.filter.language.chinese)
-    },
-    on: {
-      "change": _vm.regenerateHeatMap,
-      "__c": function($event) {
-        var $$a = _vm.filter.language.chinese,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$c) {
-            $$i < 0 && (_vm.filter.language.chinese = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.filter.language.chinese = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.filter.language.chinese = $$c
-        }
-      }
-    }
-  }), _vm._v(" Chinese\n              ")]), _vm._v(" "), _c('label', {
     staticClass: "col-md-12"
   }, [_c('input', {
     directives: [{

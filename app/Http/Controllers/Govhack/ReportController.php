@@ -56,6 +56,31 @@ class ReportController extends Controller
         $gender[] = 'females';
     } 
     $query->whereIn('gender', $gender);
+    
+    $language = []; 
+    foreach(json_decode($request->input('language')) as $lang => $lang_visibility){
+        if($lang_visibility == 'true'){
+            switch($lang){
+              case 'cantonese':
+                $language[] = 'Cantonese';
+                break;
+              case 'hakka':
+                $language[] = 'Hakka';
+                break;
+              case 'mandarin':
+                $language[] = 'Mandarin';
+                break;
+              case 'minnan':
+                $language[] = 'Min Nan';
+                break;
+              case 'vietnamese':
+                $language[] = 'Vietnamese';
+                break;
+            }
+        }
+    }
+    $query->whereIn('language_spoken_at_home', $language);
+
     $query->select('p.region', 'l.latlng', DB::raw('SUM(p.value) as total_population'));
     $results = $query->get();
 

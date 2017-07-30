@@ -45,7 +45,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51005,
                 'name' => 'Australind - Leschenault',
-                'latlng' => '-33.245,115.735',
+                'latlng' => '-33.2354892,115.7236322',
             ),
             5 => 
             array (
@@ -63,7 +63,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51008,
                 'name' => 'College Grove - Carey Park',
-                'latlng' => '-33.3524013,115.6539512',
+                'latlng' => '-33.3553739,115.6330538',
             ),
             8 => 
             array (
@@ -87,13 +87,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51012,
                 'name' => 'Eaton - Pelican Point',
-                'latlng' => '-37.9247608,140.4332516',
+                'latlng' => '-33.3119903,115.7008588',
             ),
             12 => 
             array (
                 'code' => 51013,
                 'name' => 'Gelorup - Dalyellup - Stratham',
-                'latlng' => '-33.4760669,115.6036327',
+                'latlng' => '-33.4207036,115.6295968',
             ),
             13 => 
             array (
@@ -123,7 +123,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51018,
                 'name' => 'Donnybrook - Balingup',
-                'latlng' => '-33.786944,115.981944',
+                'latlng' => '-33.6608927,115.9467997',
             ),
             18 => 
             array (
@@ -141,13 +141,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51021,
                 'name' => 'Dawesville - Bouvard',
-                'latlng' => '-32.6868972,115.6572516',
+                'latlng' => '-32.6333844,115.6335482',
             ),
             21 => 
             array (
                 'code' => 51022,
                 'name' => 'Falcon - Wannanup',
-                'latlng' => '-32.598,115.644',
+                'latlng' => '-32.607963,115.645327',
             ),
             22 => 
             array (
@@ -159,7 +159,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51024,
                 'name' => 'Halls Head - Erskine',
-                'latlng' => '-32.562,115.694',
+                'latlng' => '-32.5558615,115.6970752',
             ),
             24 => 
             array (
@@ -171,19 +171,19 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51026,
                 'name' => 'Mandurah - East',
-                'latlng' => '-27.6728168,148.3716902',
+                'latlng' => '-32.5361038,115.7424077',
             ),
             26 => 
             array (
                 'code' => 51027,
                 'name' => 'Mandurah - North',
-                'latlng' => '-25.274398,133.775136',
+                'latlng' => '-32.52304,115.727604',
             ),
             27 => 
             array (
                 'code' => 51028,
                 'name' => 'Mandurah - South',
-                'latlng' => '-30.0002315,136.2091547',
+                'latlng' => '-32.529,115.723',
             ),
             28 => 
             array (
@@ -195,7 +195,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51030,
                 'name' => 'City Beach',
-                'latlng' => '-27.9680569,153.4159223',
+                'latlng' => '-31.935080, 115.754631',
             ),
             30 => 
             array (
@@ -225,13 +225,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51035,
                 'name' => 'Nedlands - Dalkeith - Crawley',
-                'latlng' => '-31.986,115.822',
+                'latlng' => '-31.9817738,115.8026262',
             ),
             35 => 
             array (
                 'code' => 51036,
                 'name' => 'Swanbourne - Mount Claremont',
-                'latlng' => '-31.962,115.784',
+                'latlng' => '-31.9829741,115.7766568',
             ),
             36 => 
             array (
@@ -243,13 +243,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51038,
                 'name' => 'Mount Hawthorn - Leederville',
-                'latlng' => '-31.9315735,115.8418249',
+                'latlng' => '-31.9236304,115.8441587',
             ),
             38 => 
             array (
                 'code' => 51039,
                 'name' => 'Mount Lawley - Inglewood',
-                'latlng' => '-31.917,115.883',
+                'latlng' => '-31.9189769,115.8761126',
             ),
             39 => 
             array (
@@ -273,19 +273,19 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51043,
                 'name' => 'Wembley - West Leederville - Glendalough',
-                'latlng' => '-31.9201635,115.8211208',
+                'latlng' => '-31.9464011,115.8175501',
             ),
             43 => 
             array (
                 'code' => 51044,
                 'name' => 'Bassendean - Eden Hill - Ashfield',
-                'latlng' => '-33.8889,151.1249',
+                'latlng' => '-31.9217303,115.9392274',
             ),
             44 => 
             array (
                 'code' => 51045,
                 'name' => 'Bayswater - Embleton - Bedford',
-                'latlng' => '-31.909,115.891',
+                'latlng' => '-31.8990972,115.917369',
             ),
             45 => 
             array (
@@ -315,19 +315,19 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51050,
                 'name' => 'Glen Forrest - Darlington',
-                'latlng' => '-31.9226334,116.0827607',
+                'latlng' => '-31.9210127,116.1009929',
             ),
             50 => 
             array (
                 'code' => 51051,
                 'name' => 'Helena Valley - Koongamia',
-                'latlng' => '-31.904,116.04',
+                'latlng' => '-31.9228087,116.0403854',
             ),
             51 => 
             array (
                 'code' => 51052,
                 'name' => 'Malmalling - Reservoir',
-                'latlng' => '-37.71305600000001,145.011944',
+                'latlng' => '-32.0543778,116.2792032',
             ),
             52 => 
             array (
@@ -339,7 +339,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51054,
                 'name' => 'Swan View - Greenmount - Midvale',
-                'latlng' => '-31.888,116.026',
+                'latlng' => '-31.8960656,116.0609342',
             ),
             54 => 
             array (
@@ -381,13 +381,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51061,
                 'name' => 'Hazelmere - South Guildford',
-                'latlng' => '-31.912,115.972',
+                'latlng' => '-31.9022642,115.9931629',
             ),
             61 => 
             array (
                 'code' => 51062,
                 'name' => 'Lockridge - Kiara',
-                'latlng' => '-31.882,115.939',
+                'latlng' => '-31.8773284,115.9357128',
             ),
             62 => 
             array (
@@ -405,19 +405,19 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51065,
                 'name' => 'Middle Swan - Herne Hill',
-                'latlng' => '-31.824,116.03',
+                'latlng' => '-31.8635646,115.9968197',
             ),
             65 => 
             array (
                 'code' => 51066,
                 'name' => 'Midland - Guildford',
-                'latlng' => '-31.9,115.973',
+                'latlng' => '-31.898920, 115.971893',
             ),
             66 => 
             array (
                 'code' => 51067,
                 'name' => 'Stratton - Jane Brook',
-                'latlng' => '-31.86,116.061',
+                'latlng' => '-31.8601788,116.0503127',
             ),
             67 => 
             array (
@@ -435,13 +435,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51070,
                 'name' => 'Craigie - Beldon',
-                'latlng' => '-31.774,115.768',
+                'latlng' => '-31.7796155,115.76449',
             ),
             70 => 
             array (
                 'code' => 51071,
                 'name' => 'Currambine - Kinross',
-                'latlng' => '-31.722,115.74',
+                'latlng' => '-31.7258837,115.7470334',
             ),
             71 => 
             array (
@@ -453,13 +453,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51073,
                 'name' => 'Greenwood - Warwick',
-                'latlng' => '-28.2157285,152.0281701',
+                'latlng' => '-31.8335457,115.8063201',
             ),
             73 => 
             array (
                 'code' => 51074,
                 'name' => 'Heathridge - Connolly',
-                'latlng' => '-31.7487333,115.7486438',
+                'latlng' => '-31.7338936,115.7450508',
             ),
             74 => 
             array (
@@ -471,7 +471,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51076,
                 'name' => 'Iluka - Burns Beach',
-                'latlng' => '-31.71899999999999,115.724',
+                'latlng' => '-31.7366881,115.7234145',
             ),
             76 => 
             array (
@@ -489,7 +489,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51079,
                 'name' => 'Mullaloo - Kallaroo',
-                'latlng' => '-31.789,115.739',
+                'latlng' => '-31.7853165,115.7427548',
             ),
             79 => 
             array (
@@ -507,7 +507,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51082,
                 'name' => 'Sorrento - Marmion',
-                'latlng' => '-31.84,115.756',
+                'latlng' => '-31.8259917,115.7616593',
             ),
             82 => 
             array (
@@ -519,13 +519,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51084,
                 'name' => 'Balcatta - Hamersley',
-                'latlng' => '-31.852,115.806',
+                'latlng' => '-31.8596021,115.8088439',
             ),
             84 => 
             array (
                 'code' => 51085,
                 'name' => 'Balga - Mirrabooka',
-                'latlng' => '-31.863,115.87',
+                'latlng' => '-31.8567766,115.8474069',
             ),
             85 => 
             array (
@@ -543,19 +543,19 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51088,
                 'name' => 'Innaloo - Doubleview',
-                'latlng' => '-31.896,115.78',
+                'latlng' => '-31.893706,115.780397',
             ),
             88 => 
             array (
                 'code' => 51089,
                 'name' => 'Karrinyup - Gwelup - Carine',
-                'latlng' => '-31.851,115.779',
+                'latlng' => '-31.8823431,115.7933843',
             ),
             89 => 
             array (
                 'code' => 51090,
                 'name' => 'Nollamara - Westminster',
-                'latlng' => '-31.87,115.838',
+                'latlng' => '-31.8808366,115.8452754',
             ),
             90 => 
             array (
@@ -579,37 +579,37 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51094,
                 'name' => 'Trigg - North Beach - Watermans Bay',
-                'latlng' => '-31.851,115.758',
+                'latlng' => '-31.8594669,115.7762932',
             ),
             94 => 
             array (
                 'code' => 51095,
                 'name' => 'Tuart Hill - Joondanna',
-                'latlng' => '-31.91,115.836',
+                'latlng' => '-31.9028851,115.8428782',
             ),
             95 => 
             array (
                 'code' => 51096,
                 'name' => 'Wembley Downs - Churchlands - Woodlands',
-                'latlng' => '-31.909,115.791',
+                'latlng' => '-31.9158023,115.7930104',
             ),
             96 => 
             array (
                 'code' => 51097,
                 'name' => 'Yokine - Coolbinia - Menora',
-                'latlng' => '-31.916,115.861',
+                'latlng' => '-31.9139521,115.8591399',
             ),
             97 => 
             array (
                 'code' => 51098,
                 'name' => 'Alexander Heights - Koondoola',
-                'latlng' => '-31.842,115.859',
+                'latlng' => '-31.84320839999999,115.877219',
             ),
             98 => 
             array (
                 'code' => 51099,
                 'name' => 'Butler - Merriwa - Ridgewood',
-                'latlng' => '-31.661,115.722',
+                'latlng' => '-31.6648839,115.7255895',
             ),
             99 => 
             array (
@@ -633,7 +633,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51103,
                 'name' => 'Madeley - Darch - Landsdale',
-                'latlng' => '-31.8093657,115.8610488',
+                'latlng' => '-31.8180948,115.8375282',
             ),
             103 => 
             array (
@@ -645,7 +645,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51105,
                 'name' => 'Mindarie - Quinns Rocks - Jindalee',
-                'latlng' => '-31.651,115.692',
+                'latlng' => '-31.6732145,115.6989258',
             ),
             105 => 
             array (
@@ -657,7 +657,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51107,
                 'name' => 'Tapping - Ashby - Sinagra',
-                'latlng' => '-31.741,115.807',
+                'latlng' => '-31.727683,115.808969',
             ),
             107 => 
             array (
@@ -675,25 +675,25 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51110,
                 'name' => 'Armadale - Wungong - Brookdale',
-                'latlng' => '-32.168,116.003',
+                'latlng' => '-32.168998,116.0092127',
             ),
             110 => 
             array (
                 'code' => 51111,
                 'name' => 'Ashendon - Lesley',
-                'latlng' => '-32.1362076,116.2429378',
+                'latlng' => '-32.114497,116.1946192',
             ),
             111 => 
             array (
                 'code' => 51112,
                 'name' => 'Camillo - Champion Lakes',
-                'latlng' => '-32.12,115.984',
+                'latlng' => '-32.115,116.002',
             ),
             112 => 
             array (
                 'code' => 51113,
                 'name' => 'Forrestdale - Harrisdale - Piara Waters',
-                'latlng' => '-32.123,115.924',
+                'latlng' => '-32.1163461,115.9272597',
             ),
             113 => 
             array (
@@ -705,7 +705,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51115,
                 'name' => 'Mount Nasura - Mount Richon - Bedfordale',
-                'latlng' => '-32.172,116.047',
+                'latlng' => '-32.1603265,116.0217018',
             ),
             115 => 
             array (
@@ -723,7 +723,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51118,
                 'name' => 'Belmont - Ascot - Redcliffe',
-                'latlng' => '-27.2258,153.1063',
+                'latlng' => '-31.9306251,115.9376286',
             ),
             118 => 
             array (
@@ -747,25 +747,25 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51122,
                 'name' => 'Rivervale - Kewdale - Cloverdale',
-                'latlng' => '-31.96,115.945',
+                'latlng' => '-31.9699452,115.9200949',
             ),
             122 => 
             array (
                 'code' => 51123,
                 'name' => 'Victoria Park - Lathlain - Burswood',
-                'latlng' => '-31.96299999999999,115.895',
+                'latlng' => '-31.9543846,115.8953666',
             ),
             123 => 
             array (
                 'code' => 51124,
                 'name' => 'Bentley - Wilson - St James',
-                'latlng' => '-32.001,115.911',
+                'latlng' => '-32.0248419,115.9435752',
             ),
             124 => 
             array (
                 'code' => 51125,
                 'name' => 'Canning Vale - West',
-                'latlng' => '-27.6728168,121.6283098',
+                'latlng' => '-32.08000000000001,115.915',
             ),
             125 => 
             array (
@@ -777,19 +777,19 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51127,
                 'name' => 'Cannington - Queens Park',
-                'latlng' => '-32.004,115.942',
+                'latlng' => '-32.0207712,115.9256214',
             ),
             127 => 
             array (
                 'code' => 51128,
                 'name' => 'Parkwood - Ferndale - Lynwood',
-                'latlng' => '-32.0400414,115.9275821',
+                'latlng' => '-32.0382753,115.9297998',
             ),
             128 => 
             array (
                 'code' => 51129,
                 'name' => 'Riverton - Shelley - Rossmoyne',
-                'latlng' => '-32.038,115.873',
+                'latlng' => '-32.0323285,115.8732772',
             ),
             129 => 
             array (
@@ -807,13 +807,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51132,
                 'name' => 'Beckenham - Kenwick - Langford',
-                'latlng' => '-32.044,115.942',
+                'latlng' => '-32.0344916,115.9570316',
             ),
             132 => 
             array (
                 'code' => 51133,
                 'name' => 'Canning Vale - East',
-                'latlng' => '-27.6728168,148.3716902',
+                'latlng' => '-32.08000000000001,115.915',
             ),
             133 => 
             array (
@@ -825,13 +825,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51135,
                 'name' => 'Huntingdale - Southern River',
-                'latlng' => '-32.099,115.952',
+                'latlng' => '-32.0991968,115.9659221',
             ),
             135 => 
             array (
                 'code' => 51136,
                 'name' => 'Maddington - Orange Grove - Martin',
-                'latlng' => '-37.817059,144.957548',
+                'latlng' => '-32.0352128,116.0162655',
             ),
             136 => 
             array (
@@ -843,7 +843,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51138,
                 'name' => 'Forrestfield - Wattle Grove',
-                'latlng' => '-32.008,116.014',
+                'latlng' => '-32.0064542,115.9893338',
             ),
             138 => 
             array (
@@ -855,13 +855,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51140,
                 'name' => 'Kalamunda - Maida Vale - Gooseberry Hill',
-                'latlng' => '-31.954,116.049',
+                'latlng' => '-31.9520708,116.0283647',
             ),
             140 => 
             array (
                 'code' => 51141,
                 'name' => 'Lesmurdie - Bickley - Carmel',
-                'latlng' => '-32.021,116.096',
+                'latlng' => '-32.01252,116.05164',
             ),
             141 => 
             array (
@@ -879,7 +879,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51144,
                 'name' => 'Serpentine - Jarrahdale',
-                'latlng' => '-32.3226016,116.0251338',
+                'latlng' => '-32.3492396,115.9940986',
             ),
             144 => 
             array (
@@ -891,13 +891,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51146,
                 'name' => 'Manning - Waterford',
-                'latlng' => '-32.017,115.884',
+                'latlng' => '-32.0126409,115.8878431',
             ),
             146 => 
             array (
                 'code' => 51147,
                 'name' => 'South Perth - Kensington',
-                'latlng' => '-33.90888899999999,151.223333',
+                'latlng' => '-31.9825,115.884444',
             ),
             147 => 
             array (
@@ -927,7 +927,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51152,
                 'name' => 'Coogee',
-                'latlng' => '-33.919,151.2555',
+                'latlng' => '-32.118824, 115.765956',
             ),
             152 => 
             array (
@@ -969,7 +969,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51159,
                 'name' => 'South Lake - Cockburn Central',
-                'latlng' => '-32.121,115.848',
+                'latlng' => '-32.107,115.841',
             ),
             159 => 
             array (
@@ -981,7 +981,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51161,
                 'name' => 'Success - Hammond Park',
-                'latlng' => '-32.168,115.851',
+                'latlng' => '-32.1595786,115.8471184',
             ),
             161 => 
             array (
@@ -1011,7 +1011,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51166,
                 'name' => 'Fremantle - South',
-                'latlng' => '-30.0002315,136.2091547',
+                'latlng' => '-32.074,115.754',
             ),
             166 => 
             array (
@@ -1023,13 +1023,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51168,
                 'name' => 'Anketell - Wandi',
-                'latlng' => '-32.197,115.887',
+                'latlng' => '-32.2099698,115.850861',
             ),
             168 => 
             array (
                 'code' => 51169,
             'name' => 'Bertram - Wellard (West)',
-                'latlng' => '-32.269,115.865',
+                'latlng' => '-32.2518937,115.8399461',
             ),
             169 => 
             array (
@@ -1041,13 +1041,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51171,
             'name' => 'Casuarina - Wellard (East)',
-                'latlng' => '-32.269,115.865',
+                'latlng' => '-32.246971,115.8870343',
             ),
             171 => 
             array (
                 'code' => 51172,
                 'name' => 'Hope Valley - Postans',
-                'latlng' => '-32.219,115.813',
+                'latlng' => '-32.1903431,115.8120337',
             ),
             172 => 
             array (
@@ -1059,13 +1059,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51174,
                 'name' => 'Parmelia - Orelia',
-                'latlng' => '-32.236,115.823',
+                'latlng' => '-32.2490242,115.8255562',
             ),
             174 => 
             array (
                 'code' => 51175,
                 'name' => 'Applecross - Ardross',
-                'latlng' => '-32.026,115.836',
+                'latlng' => '-32.0119668,115.8358595',
             ),
             175 => 
             array (
@@ -1077,7 +1077,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51177,
                 'name' => 'Bicton - Palmyra',
-                'latlng' => '-32.049,115.785',
+                'latlng' => '-32.0353893,115.7861206',
             ),
             177 => 
             array (
@@ -1107,7 +1107,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51182,
                 'name' => 'Murdoch - Kardinya',
-                'latlng' => '-32.066,115.815',
+                'latlng' => '-32.0627133,115.8428814',
             ),
             182 => 
             array (
@@ -1155,13 +1155,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51190,
                 'name' => 'Safety Bay - Shoalwater',
-                'latlng' => '-32.295,115.706',
+                'latlng' => '-32.325167,115.7709282',
             ),
             190 => 
             array (
                 'code' => 51191,
                 'name' => 'Singleton - Golden Bay - Secret Harbour',
-                'latlng' => '-32.404,115.757',
+                'latlng' => '-32.432552,115.7656936',
             ),
             191 => 
             array (
@@ -1215,7 +1215,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51200,
                 'name' => 'Kalgoorlie - North',
-                'latlng' => '-25.274398,133.775136',
+                'latlng' => '-30.749,121.466',
             ),
             200 => 
             array (
@@ -1233,7 +1233,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51203,
                 'name' => 'Leinster - Leonora',
-                'latlng' => '-28.88,121.33',
+                'latlng' => '-27.911944,120.697',
             ),
             203 => 
             array (
@@ -1251,7 +1251,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51206,
                 'name' => 'Derby - West Kimberley',
-                'latlng' => '-17.3491799,125.9152074',
+                'latlng' => '-16.8419306,125.2148469',
             ),
             206 => 
             array (
@@ -1281,19 +1281,19 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51211,
                 'name' => 'Geraldton - East',
-                'latlng' => '-27.6728168,148.3716902',
+                'latlng' => '-28.7773715,114.6149715',
             ),
             211 => 
             array (
                 'code' => 51212,
                 'name' => 'Geraldton - North',
-                'latlng' => '-25.274398,133.775136',
+                'latlng' => '-28.7773715,114.6149715',
             ),
             212 => 
             array (
                 'code' => 51213,
                 'name' => 'Geraldton - South',
-                'latlng' => '-30.0002315,136.2091547',
+                'latlng' => '-28.7773715,114.6149715',
             ),
             213 => 
             array (
@@ -1377,7 +1377,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51227,
                 'name' => 'Bayonet Head - Lower King',
-                'latlng' => '-34.96,117.93',
+                'latlng' => '-34.9693117,117.9244716',
             ),
             227 => 
             array (
@@ -1407,13 +1407,13 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51232,
                 'name' => 'Little Grove - Elleker',
-                'latlng' => '-35.016667,117.716667',
+                'latlng' => '-35.0085375,117.7244134',
             ),
             232 => 
             array (
                 'code' => 51233,
                 'name' => 'McKail - Willyung',
-                'latlng' => '-34.93995960000001,117.8728245',
+                'latlng' => '-35.0001344,117.8553331',
             ),
             233 => 
             array (
@@ -1431,7 +1431,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51236,
                 'name' => 'Chittering',
-                'latlng' => '-31.3959274,116.0886704',
+                'latlng' => '-31.4891708,116.0694633',
             ),
             236 => 
             array (
@@ -1449,7 +1449,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51239,
                 'name' => 'Gingin - Dandaragan',
-                'latlng' => '-30.6533473,115.6997361',
+                'latlng' => '-30.7889815,115.7083265',
             ),
             239 => 
             array (
@@ -1485,7 +1485,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51245,
                 'name' => 'York - Beverley',
-                'latlng' => '-32.109,116.926',
+                'latlng' => '-32.098644, 116.903869',
             ),
             245 => 
             array (
@@ -1503,7 +1503,7 @@ class LocationLatlngTableSeeder extends Seeder
             array (
                 'code' => 51248,
                 'name' => 'Murray',
-                'latlng' => '-35.3752688,143.742464',
+                'latlng' => '-32.655053, 115.946783',
             ),
             248 => 
             array (

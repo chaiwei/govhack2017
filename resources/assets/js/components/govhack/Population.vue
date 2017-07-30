@@ -43,9 +43,6 @@
             <label for="filter-agegroup">language spoken at home (2016)</label>
             <div class="checkbox clearfix"> 
                 <label class="col-md-12">
-                    <input type="checkbox" v-model="filter.language.chinese" v-on:change="regenerateHeatMap" /> Chinese
-                </label>
-                <label class="col-md-12">
                     <input type="checkbox" v-model="filter.language.cantonese" v-on:change="regenerateHeatMap" /> Cantonese
                 </label>
                 <label class="col-md-12">
@@ -102,7 +99,6 @@
                     male: true,
                     female: true,
                     language: {
-                        chinese: true,
                         cantonese: true,
                         hakka: true,
                         mandarin: true,
@@ -128,13 +124,13 @@
             },
             datasetVisibility () {
                   
-                if(!this.filter.dataset.population){
+                if(!this.filter.dataset.population && typeof window.markerClusterPopulation == 'object'){
                     window.markerClusterPopulation.clearMarkers();
                 }
-                if(!this.filter.dataset.language){
-                    //window.markerClusterLanguage.clearMarkers();
+                if(!this.filter.dataset.language && typeof window.markerClusterLanguage == 'object'){
+                    window.markerClusterLanguage.clearMarkers();
                 }
-                if(!this.filter.dataset.agecareservice){
+                if(!this.filter.dataset.agecareservice && typeof window.markerClusterAgecare == 'object'){
                     window.markerClusterAgecare.clearMarkers();
                 }
                 window.generateHeatMap();
@@ -190,11 +186,11 @@
                                         response.data[index].location.lng
                                     ),
                                     animation: google.maps.Animation.DROP,
-                                    label: ""+parseInt(response.data[index].weight).toLocaleString(),
-                                    title: response.data[index].area + " : " +response.data[index].weight,
+                                    label: ""+parseInt(response.data[index].weight),
+                                    title: 'Language: '+response.data[index].language + " : " +response.data[index].weight,
                                     icon: image
                                 });
-                                //window.heatmapDataLanguage.push(result);
+                                window.heatmapDataLanguage.push(result);
 
                             }
                             // Add a marker clusterer to manage the markers.
