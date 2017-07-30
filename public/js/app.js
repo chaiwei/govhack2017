@@ -15525,16 +15525,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
         datasetVisibility: function datasetVisibility() {
 
-            if (this.filter.dataset.population == 'faise') {
+            if (!this.filter.dataset.population) {
                 window.markerClusterPopulation.clearMarkers();
             }
-            if (this.filter.dataset.language == 'faise') {
-                window.markerClusterLanguage.clearMarkers();
+            if (!this.filter.dataset.language) {
+                //window.markerClusterLanguage.clearMarkers();
             }
-            if (this.filter.dataset.agecareservice == 'faise') {
+            if (!this.filter.dataset.agecareservice) {
                 window.markerClusterAgecare.clearMarkers();
             }
-            // window.generateHeatMap();
+            window.generateHeatMap();
         },
         regenerateHeatMap: function regenerateHeatMap() {
             window.generateHeatMap();
@@ -15568,7 +15568,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             window['generateHeatMap'] = function () {
 
                 // language
-                if (this.filter.dataset.language == 'true') {
+                if (this.filter.dataset.language) {
 
                     axios.get('/ajax/languagespoken/' + this.filter.year, { params: this.filter }).then(function (response) {
 
@@ -15613,7 +15613,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     });
                 }
 
-                if (this.filter.dataset.population == 'true') {
+                if (this.filter.dataset.population) {
                     // population
                     axios.get('/ajax/population/' + this.filter.year, { params: this.filter }).then(function (response) {
 
@@ -15658,7 +15658,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     });
                 }
 
-                if (this.filter.dataset.agecareservice == 'true') {
+                if (this.filter.dataset.agecareservice) {
                     // agecare service providers
                     axios.get('/ajax/agecare-service-providers', { params: this.filter }).then(function (response) {
 
@@ -15672,7 +15672,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                             var result = new google.maps.Marker({
                                 position: new google.maps.LatLng(response.data[index].location.lat, response.data[index].location.lng),
                                 animation: google.maps.Animation.DROP,
-                                label: "1",
+                                label: "" + response.data[index].weight,
                                 title: "Agecare " + response.data[index].provider_name + " : " + response.data[index].weight,
                                 icon: image
                             });
@@ -15684,8 +15684,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         });
                         window.markerClusterAgecare.calculator_ = function (markers, numStyles) {
                             var index = 0;
-                            var count = markers.length;
-
+                            var count = 0;
+                            for (var x in markers) {
+                                count += markers[x].label * 1;
+                            }
                             var dv = count;
                             while (dv !== 0) {
                                 dv = parseInt(dv / 10, 10);

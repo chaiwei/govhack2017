@@ -124,16 +124,16 @@
             },
             datasetVisibility () {
                   
-                if(this.filter.dataset.population == 'faise'){
+                if(!this.filter.dataset.population){
                     window.markerClusterPopulation.clearMarkers();
                 }
-                if(this.filter.dataset.language == 'faise'){
-                    window.markerClusterLanguage.clearMarkers();
+                if(!this.filter.dataset.language){
+                    //window.markerClusterLanguage.clearMarkers();
                 }
-                if(this.filter.dataset.agecareservice == 'faise'){
+                if(!this.filter.dataset.agecareservice){
                     window.markerClusterAgecare.clearMarkers();
                 }
-                // window.generateHeatMap();
+                window.generateHeatMap();
             },
             regenerateHeatMap () {
                 window.generateHeatMap();
@@ -169,7 +169,7 @@
                 window['generateHeatMap'] = function(){
                     
                     // language
-                    if(this.filter.dataset.language == 'true'){
+                    if(this.filter.dataset.language){
 
                         axios.get('/ajax/languagespoken/'+this.filter.year, { params: this.filter }).then(response => {
 
@@ -218,7 +218,7 @@
                         });
                     }
                     
-                    if(this.filter.dataset.population == 'true'){
+                    if(this.filter.dataset.population){
                         // population
                         axios.get('/ajax/population/'+this.filter.year, { params: this.filter }).then(response => {
 
@@ -267,7 +267,7 @@
                         });
                     }
 
-                    if(this.filter.dataset.agecareservice == 'true'){
+                    if(this.filter.dataset.agecareservice){
                         // agecare service providers
                         axios.get('/ajax/agecare-service-providers', { params: this.filter }).then(response => {
 
@@ -284,7 +284,7 @@
                                         response.data[index].location.lng
                                     ),
                                     animation: google.maps.Animation.DROP,
-                                    label: "1",
+                                    label: ""+response.data[index].weight,
                                     title: "Agecare "+response.data[index].provider_name + " : " +response.data[index].weight,
                                     icon: image
                                 });
@@ -297,8 +297,10 @@
                             });
                             window.markerClusterAgecare.calculator_ = function(markers, numStyles) {
                                 var index = 0;
-                                var count = markers.length;
-
+                                var count = 0;
+                                for(var x in markers){
+                                  count += (markers[x].label*1);
+                                } 
                                 var dv = count;
                                 while (dv !== 0) {
                                   dv = parseInt(dv / 10, 10);
